@@ -1,5 +1,6 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
+import localFont from "next/font/local"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
@@ -25,6 +26,27 @@ export const metadata: Metadata = {
   },
 }
 
+const lamore = localFont({
+  src: [
+    {
+      path: "font/lamore/LAMORELight.woff",
+      weight: "300",
+      style: "light",
+    },
+    {
+      path: "font/lamore/LAMORERegular.woff2",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "font/lamore/LAMORERegular.woff",
+      weight: "400",
+      style: "regular",
+    },
+  ],
+  variable: "--font-lamore",
+})
+
 interface RootLayoutProps {
   children: React.ReactNode
 }
@@ -37,13 +59,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",
+            lamore.className,
+            lamore.variable,
             fontSans.variable
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
-              <div className="flex-1">{children}</div>
+              <div className=" h-[calc(100vh-112px)] ">{children}</div>
             </div>
             <TailwindIndicator />
           </ThemeProvider>

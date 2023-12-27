@@ -55,6 +55,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        lamore: ["var(--font-lamore)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {
