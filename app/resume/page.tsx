@@ -13,7 +13,7 @@ function page() {
           <br />
           El Alaoui Ismaili,
         </h1>
-        <p className="max-w-[544px] text-sm pt-6 pb-12 max-w-[544px] leading-7	">
+        <p className=" text-sm pt-6 pb-12 max-w-[544px] leading-7	">
           an architect based in Tangier. I specialize in innovative designs that
           seamlessly blend form and function. With a strong foundation in
           architectural principles and a commitment to excellence, I bring a

@@ -1,13 +1,18 @@
+"use client"
+
 import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Menu } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { Menu, X } from "lucide-react"
+import { useTheme } from "next-themes"
 
 import { NavItem } from "@/types/nav"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 
+import MobileMenu from "./MobileMenu"
 import { Button, buttonVariants } from "./ui/button"
 
 interface MainNavProps {
@@ -15,9 +20,19 @@ interface MainNavProps {
 }
 
 export function MainNav({ items }: MainNavProps) {
+  const [open, setOpen] = React.useState(false)
+  const path = usePathname()
+
+  const { setTheme, theme } = useTheme()
+
+  setTheme("light")
+
+  const openMenu = () => {
+    setOpen((prev) => !prev)
+  }
   return (
     <div className="flex justify-between w-full gap-6 md:gap-10">
-      <Link href="/" className="flex items-center space-x-2">
+      <Link href="/" className="flex items-center space-x-2 z-20">
         <Image src="/logo_black.png" alt="logo" height={36} width={146} />
       </Link>
 
@@ -29,14 +44,14 @@ export function MainNav({ items }: MainNavProps) {
                 <Link
                   key={index}
                   href={item.href}
-                  // className={cn(
-                  //   "flex items-center text-sm font-medium text-muted-foreground uppercase ",
-                  //   item.disabled && "cursor-not-allowed opacity-80"
-                  // )}
                   className={buttonVariants({
                     variant: "link",
                     size: "link",
-                    className: " uppercase ",
+                    className: `uppercase ${
+                      path.includes(item.title.toLowerCase())
+                        ? "underline"
+                        : "text-muted-foreground"
+                    }`,
                   })}
                 >
                   {item.title}
@@ -47,13 +62,15 @@ export function MainNav({ items }: MainNavProps) {
             className={buttonVariants({
               variant: "link",
               size: "icon",
-              className: "h-8 p-0 ",
+              className: "h-8 p-0 z-20 ",
             })}
+            onClick={openMenu}
           >
-            <Menu className="w-6 " />
+            {open ? <X className="w-8 " /> : <Menu className="w-8 " />}
           </Button>
         </nav>
       ) : null}
+      {open ? <MobileMenu /> : null}
     </div>
   )
 }

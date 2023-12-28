@@ -1,12 +1,15 @@
 import React from "react"
 
 import ProjectCard from "./ProjectCard"
+import { projectType } from "./type"
 
-function ProjectList() {
+function ProjectList({ data }: { data: projectType[] }) {
+  console.log(data)
   return (
     <div className="flex flex-col gap-9">
-      <ProjectCard />
-      <ProjectCard />
+      {data.map((card: projectType) => {
+        return <ProjectCard key={card.title} card={card} />
+      })}
     </div>
   )
 }

@@ -1,12 +1,14 @@
 import React from "react"
 
-function ProjectCard() {
+import { projectType } from "./type"
+
+function ProjectCard({ card }: { card: projectType }) {
   return (
     <div className="flex w-full  items-center justify-between gap-2">
-      <h1 className="font-lamore text-[54px] font-normal uppercase leading-tight tracking-tighter md:text-4xl">
-        GENERALI TOWER
+      <h1 className="font-lamore text-4xl font-normal uppercase leading-tight tracking-tighter md:text-[54px]">
+        {card.title}
       </h1>
-      <span className=" text-2xl  text-accent-foreground">Milan, ITALY</span>
+      <span className=" text-2xl text-accent-foreground">{card.location}</span>
     </div>
   )
 }
