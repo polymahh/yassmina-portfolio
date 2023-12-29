@@ -14,15 +14,16 @@ export async function GET(req:Request){
         const query = await notion.databases.query({
             database_id:projectsDB
         })
-        console.log(query)
 
-        const structuredData  = query.results.map((project:any) => {
-            return {
-                title : project?.properties?.title?.title[0]?.plain_text,
-                location : project?.properties?.location?.rich_text[0]?.plain_text,
-                image : project?.properties?.image?.files[0]?.file?.url,
-            }
-        })
+        // const structuredData  = query.results.map((project:any) => {
+        //     return {
+        //         title : project?.properties?.title?.title[0]?.plain_text,
+        //         location : project?.properties?.location?.rich_text[0]?.plain_text,
+        //         image : project?.properties?.image?.files[0]?.file?.url,
+        //     }
+        // })
+
+        const structuredData  = query
             
         return Response.json({data:structuredData,message:"projects"},{status:201})
     } catch (error) {

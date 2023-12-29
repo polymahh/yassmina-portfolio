@@ -1,5 +1,7 @@
 import React from "react"
 import Image from "next/image"
+import Link from "next/link"
+import { MoveLeft } from "lucide-react"
 
 import {
   Carousel,
@@ -10,27 +12,34 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel"
 
-import { Button } from "../ui/button"
+import { Button, buttonVariants } from "../ui/button"
 import { projectType } from "./type"
 
-function ProjectCarousel({ data }: { data: projectType[] }) {
-  // const [api, setApi] = React.useState<CarouselApi>()
-
-  // React.useEffect(() => {
-  //   if (!api) {
-  //     return
-  //   }
-
-  //   api.on("", (slide) => {
-  //     // Do something on select.
-  //     console.log(slide)
-  //   })
-  // }, [api])
+function ProjectPage({
+  page,
+  setShowPage,
+}: {
+  page: projectType
+  setShowPage: any
+}) {
   return (
-    <div>
+    <div className="relative w-screen h-screen p-9 flex justify-center items-start bg-white z-40">
+      <div className="absolute w-full flex justify-center">
+        <Button
+          className={buttonVariants({
+            variant: "link",
+            size: "icon",
+            className: "h-8 p-0 z-20 absolute top-0 left-9",
+          })}
+          onClick={() => setShowPage(false)}
+        >
+          <MoveLeft />
+        </Button>
+        <Image src="/logo_black.png" alt="logo" height={36} width={146} />
+      </div>
       <Carousel>
         <CarouselContent>
-          {data.map((card: projectType, idx: number) => {
+          {/* {page.map((card: projectType, idx: number) => {
             return (
               <CarouselItem key={card.title} className="">
                 <div className="flex flex-col items-center ">
@@ -49,7 +58,7 @@ function ProjectCarousel({ data }: { data: projectType[] }) {
                 </div>
               </CarouselItem>
             )
-          })}
+          })} */}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
@@ -58,4 +67,4 @@ function ProjectCarousel({ data }: { data: projectType[] }) {
   )
 }
 
-export default ProjectCarousel
+export default ProjectPage
