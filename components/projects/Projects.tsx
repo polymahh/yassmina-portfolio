@@ -5,7 +5,6 @@ import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 
-import Carousel from "../carousel/Carousel"
 import { Button, buttonVariants } from "../ui/button"
 import ProjectCarousel from "./ProjectCarousel"
 import ProjectIndex from "./ProjectIndex"
@@ -28,28 +27,6 @@ function Projects({ data }: any) {
       ) : (
         <>
           <ProjectCarousel data={data.data} />
-          {/* <Carousel
-            width={1100}
-            height={500}
-            items={data?.data.map((card: projectType, idx: number) => {
-              return (
-                <div className="flex flex-col items-center ">
-                  <Image
-                    src={card.image}
-                    width={1120}
-                    height={509}
-                    alt={card.title}
-                  />
-                  <h2 className="font-lamore text-4xl font-normal uppercase leading-tight tracking-tighter md:text-[54px] mt-8">
-                    {card.title}
-                  </h2>
-                  <span className=" text-2xl text-accent-foreground">
-                    {card.location}
-                  </span>
-                </div>
-              )
-            })}
-          /> */}
         </>
       )}
       <div className="flex gap-4 ">

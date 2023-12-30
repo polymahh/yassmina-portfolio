@@ -32,7 +32,7 @@ export function MainNav({ items }: MainNavProps) {
   }
   return (
     <div className="flex justify-between w-full gap-6 md:gap-10">
-      <Link href="/" className="flex items-center space-x-2 ">
+      <Link href="/" className="flex items-center space-x-2 z-40">
         <Image src="/logo_black.png" alt="logo" height={36} width={146} />
       </Link>
 

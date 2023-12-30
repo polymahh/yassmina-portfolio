@@ -35,7 +35,7 @@ function ProjectCarousel({ data }: { data: projectType[] }) {
               <CarouselItem key={card.title} className="">
                 <div className="flex flex-col items-center ">
                   <Image
-                    src={card.image}
+                    src={card.preview}
                     width={1120}
                     height={509}
                     alt={card.title}

@@ -8,7 +8,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 
 export function SiteHeader() {
   return (
-    <header className="bg-background sticky top-0 z-40 w-full ">
+    <header className="bg-background sticky top-0 z-20 w-full ">
       <div className="container flex  items-center py-9 space-x-4 sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
       </div>
