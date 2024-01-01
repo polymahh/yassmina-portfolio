@@ -56,7 +56,7 @@ function Projects({ data }: any) {
         </Button>
       </div>
       <div
-        className={cn("absolute top-0 left-0", !!showpage ? "flex" : "hidden")}
+        className={cn("absolute left-0 top-0", !!showpage ? "flex" : "hidden")}
       >
         <ProjectPage page={page} setShowPage={setShowPage} />
       </div>

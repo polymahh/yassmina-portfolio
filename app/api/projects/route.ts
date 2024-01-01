@@ -16,7 +16,6 @@ export async function GET(req:Request){
         const query = await notion.databases.query({
             database_id:projectsDB
         })
-        console.log(query)
 
         const structuredData  = query.results.map((project:any) => {
 

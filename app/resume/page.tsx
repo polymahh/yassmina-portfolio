@@ -6,14 +6,14 @@ import { Button, buttonVariants } from "@/components/ui/button"
 
 function page() {
   return (
-    <section className="container flex max-w-[1116px] justify-between flex-wrap-reverse md:flex-nowrap  gap-6 pb-8 pt:8 md:pt-20 ">
+    <section className="pt:8 container flex max-w-[1116px] flex-wrap-reverse justify-between  gap-6 pb-8 md:flex-nowrap md:pt-20 ">
       <div className="flex  flex-col items-start justify-center ">
         <h1 className="font-lamore text-4xl uppercase">
           Hi, I&apos;m Yasmina
           <br />
           El Alaoui Ismaili,
         </h1>
-        <p className=" text-sm pt-6 pb-12 max-w-[544px] leading-7	">
+        <p className=" max-w-[544px] pb-12 pt-6 text-sm leading-7	">
           an architect based in Tangier. I specialize in innovative designs that
           seamlessly blend form and function. With a strong foundation in
           architectural principles and a commitment to excellence, I bring a
@@ -28,7 +28,7 @@ function page() {
           })}
         >
           <Download />{" "}
-          <span className="font-light pl-2">Download my resume</span>
+          <span className="pl-2 font-light">Download my resume</span>
         </Button>
       </div>
       <div>

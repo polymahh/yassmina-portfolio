@@ -42,7 +42,7 @@ function ProjectCarousel({ data }: { data: projectType[] }) {
                     />
                   </div>
 
-                  <h2 className="font-lamore text-4xl font-normal text-center uppercase leading-tight tracking-tighter md:text-[54px] mt-8">
+                  <h2 className="mt-8 text-center font-lamore text-4xl font-normal uppercase leading-tight tracking-tighter md:text-[54px]">
                     {card.title}
                   </h2>
                   <span className=" text-2xl text-accent-foreground">

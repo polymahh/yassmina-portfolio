@@ -4,14 +4,20 @@ import axios from "axios"
 
 import Projects from "@/components/projects/Projects"
 
+const getProjects = async () => {
+  const responce = await fetch(`${process.env.BASE_URL}/api/projects`, {
+    cache: "force-cache",
+  })
+
+  return responce.json()
+}
+
 async function page() {
-  const responce = await axios
-    .get(`${process.env.BASE_URL}/api/projects`)
-    .catch((err) => console.log(err))
-  console.log("🚀 ~ file: page.tsx:11 ~ page ~ data:", responce)
+  const data = await getProjects()
+  console.log("🚀 ~ file: page.tsx:11 ~ page ~ data:", data)
   return (
     <section className="container flex h-full flex-col justify-between gap-6 pb-8 pt-6 md:py-10">
-      <Projects data={responce?.data} />
+      <Projects data={data} />
     </section>
   )
 }

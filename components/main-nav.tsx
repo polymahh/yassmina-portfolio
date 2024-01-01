@@ -49,17 +49,17 @@ export function MainNav({ items }: MainNavProps) {
   }
   return (
     <motion.div
-      className="flex justify-between w-full gap-6 md:gap-10"
+      className="flex w-full justify-between gap-6 md:gap-10"
       variants={headerAnimation}
       initial="rest"
       animate={"motion"}
     >
-      <Link href="/" className="flex items-center space-x-2 z-40">
+      <Link href="/" className="z-40 flex items-center space-x-2">
         <Image src="/logo_black.png" alt="logo" height={36} width={146} />
       </Link>
 
       {items?.length ? (
-        <motion.nav className="flex gap-16 items-center ">
+        <motion.nav className="flex items-center gap-16 ">
           {items?.map(
             (item, index) =>
               item.href && (

@@ -56,9 +56,9 @@ export function ContactForm() {
       <div className="flex justify-center">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-8 w-[888px]"
+          className="flex w-[888px] flex-col gap-8"
         >
-          <div className="flex gap-6 flex-wrap sm:flex-nowrap">
+          <div className="flex flex-wrap gap-6 sm:flex-nowrap">
             <FormField
               control={form.control}
               name="name"
@@ -118,7 +118,7 @@ export function ContactForm() {
             name="file"
             render={({ field }) => (
               <FormItem className="w-fit">
-                <FormLabel className="uppercase flex gap-2 items-center cursor-pointer">
+                <FormLabel className="flex cursor-pointer items-center gap-2 uppercase">
                   <Paperclip /> <span>Attach Files</span>
                 </FormLabel>
                 <FormControl>
@@ -139,11 +139,11 @@ export function ContactForm() {
               <Send /> <span className="pl-4 uppercase">send</span>
             </Button>
             <div>
-              <div className="flex gap-2 items-center pb-6">
+              <div className="flex items-center gap-2 pb-6">
                 <Phone />
                 <span className="text-xl">(+212) 634 259 698</span>
               </div>
-              <div className="flex gap-2 items-center">
+              <div className="flex items-center gap-2">
                 <Mail />
                 <span className="text-xl">Hello@Yasmina.com</span>
               </div>

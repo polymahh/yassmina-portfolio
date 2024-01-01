@@ -54,22 +54,22 @@ function ProjectCard({
 
   return (
     <motion.div
-      className={`flex flex-col md:flex-row w-full  items-center  w-full justify-between hover:cursor-pointer `}
+      className={`flex w-full flex-col  items-center  justify-between hover:cursor-pointer md:flex-row `}
       onClick={() => handleClick(idx)}
       variants={titleAnimation}
       initial="rest"
       whileHover="hover"
     >
-      <h1 className="font-lamore text-4xl text-center md:text-left font-normal uppercase leading-none lg:text-[54px]">
+      <h1 className="text-center font-lamore text-4xl font-normal uppercase leading-none md:text-left lg:text-[54px]">
         {card.title}
       </h1>
       <motion.div
         variants={imageAnimation}
-        className="opacity-0 hidden md:flex  "
+        className="hidden opacity-0 md:flex  "
       >
         <Image src={card.preview} alt="preview" height="120" width="300" />
       </motion.div>
-      <span className=" text-lg lg:text-2xl text-right text-accent-foreground">
+      <span className=" text-right text-lg text-accent-foreground lg:text-2xl">
         {card.location}
       </span>
     </motion.div>

@@ -30,13 +30,13 @@ const menuAnimation = {
 function MobileMenu({ open }: { open: boolean }) {
   return (
     <motion.div
-      className="bg-popover overflow-hidden flex justify-center absolute w-svw h-svh  top-0 -right-0"
+      className="absolute -right-0 top-0 flex h-svh w-svw justify-center  overflow-hidden bg-popover"
       // className="bg-red-500  flex justify-center absolute top-0 left-0 bottom-0"
       variants={menuAnimation}
       animate={open ? "open" : "closed"}
       initial="rest"
     >
-      <div className=" p-12 absolute h-full  w-full container flex flex-col-reverse md:flex-row  md:justify-between items-end">
+      <div className=" container absolute flex  h-full w-full flex-col-reverse items-end p-12  md:flex-row md:justify-between">
         <div className="flex flex-col gap-2  pb-6">
           <span className="text-xl">(+212) 634 259 698</span>
           <span className="text-xl">Hello@Yasmina.com</span>
@@ -46,7 +46,7 @@ function MobileMenu({ open }: { open: boolean }) {
             <Twitter />
           </div>
         </div>
-        <div className="flex flex-col gap-8 text-6xl  mb-[108px]">
+        <div className="mb-[108px] flex flex-col gap-8  text-6xl">
           {siteConfig.mainNav.map(
             (item, index) =>
               item.href && (

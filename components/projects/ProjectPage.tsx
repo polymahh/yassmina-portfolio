@@ -26,8 +26,8 @@ function ProjectPage({
 }) {
   console.log("🚀 ~ file: ProjectPage.tsx:25 ~ page:", page)
   return (
-    <div className="relative w-screen h-screen flex justify-center items-start bg-white z-40 overflow-hidden">
-      <div className="absolute w-full flex p-9 justify-center">
+    <div className="relative z-40 flex h-screen w-screen items-start justify-center overflow-hidden bg-white">
+      <div className="absolute flex w-full justify-center p-9">
         <Button
           className={buttonVariants({
             variant: "link",
@@ -53,11 +53,11 @@ function ProjectPage({
       >
         <CarouselContent>
           <CarouselItem key={page.title} className="max-w-[900px]">
-            <div className="flex flex-col items-center justify-center h-full  ">
+            <div className="flex h-full flex-col items-center justify-center  ">
               <span className=" text-2xl text-accent-foreground">
                 {page.location}
               </span>
-              <h2 className="font-lamore text-9xl font-normal  text-center uppercase  md:text-[54px] ">
+              <h2 className="text-center font-lamore text-9xl  font-normal uppercase  md:text-[54px] ">
                 {page.title}
               </h2>
             </div>
@@ -82,8 +82,8 @@ function ProjectPage({
               </CarouselItem>
             ) : (
               <CarouselItem key={page.title} className="max-w-[900px]">
-                <div className="flex flex-col items-center justify-center h-full ">
-                  <h2 className="font-lamore text-2xl font-normal text-center leading-tight uppercase md:text-[54px]">
+                <div className="flex h-full flex-col items-center justify-center ">
+                  <h2 className="text-center font-lamore text-2xl font-normal uppercase leading-tight md:text-[54px]">
                     {card[card.type].content}
                   </h2>
                 </div>
