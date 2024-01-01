@@ -43,6 +43,7 @@ export async function getProjects() {
         slides: slides,
       }
     })
+
     return structuredData
   } catch (error) {
     console.log(error)
@@ -52,7 +53,6 @@ export async function getProjects() {
 // export const dynamic = "force-dynamic"
 async function page() {
   const data = await getProjects()
-  console.log("🚀 ~ file: page.tsx:11 ~ page ~ data:", data)
   return (
     <section className="container flex h-full flex-col justify-between gap-6 pb-8 pt-6 md:py-10">
       <Projects data={data} />

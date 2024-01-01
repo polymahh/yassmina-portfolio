@@ -6,7 +6,6 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
-import { useTheme } from "next-themes"
 
 import { NavItem } from "@/types/nav"
 import { siteConfig } from "@/config/site"
@@ -40,10 +39,6 @@ export function MainNav({ items }: MainNavProps) {
   const [open, setOpen] = React.useState(false)
   const path = usePathname()
 
-  const { setTheme, theme } = useTheme()
-
-  setTheme("light")
-
   const openMenu = () => {
     setOpen((prev) => !prev)
   }
@@ -63,7 +58,7 @@ export function MainNav({ items }: MainNavProps) {
           {items?.map(
             (item, index) =>
               item.href && (
-                <motion.div className="hidden md:flex">
+                <motion.div key={item.title} className="hidden md:flex">
                   <Link
                     key={index}
                     href={item.href}

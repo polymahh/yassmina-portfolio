@@ -14,19 +14,15 @@ import { projectType } from "./type"
 function Projects({ data }: any) {
   const [index, setIndex] = useState(true)
   const [showpage, setShowPage] = useState(false)
-  const [page, setPage] = useState(data.data[0])
+  const [page, setPage] = useState(data[0])
 
   return (
     <div className="flex h-full flex-col justify-between">
       {index ? (
-        <ProjectIndex
-          data={data.data}
-          setPage={setPage}
-          setShowPage={setShowPage}
-        />
+        <ProjectIndex data={data} setPage={setPage} setShowPage={setShowPage} />
       ) : (
         <>
-          <ProjectCarousel data={data.data} />
+          <ProjectCarousel data={data} />
         </>
       )}
       <div className="flex gap-4 ">

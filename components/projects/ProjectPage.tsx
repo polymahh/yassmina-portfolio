@@ -52,17 +52,17 @@ function ProjectPage({
         }}
       >
         <CarouselContent>
-          <CarouselItem key={page.title} className="max-w-[900px]">
+          <CarouselItem key={page?.title} className="max-w-[900px]">
             <div className="flex h-full flex-col items-center justify-center  ">
               <span className=" text-2xl text-accent-foreground">
-                {page.location}
+                {page?.location}
               </span>
               <h2 className="text-center font-lamore text-9xl  font-normal uppercase  md:text-[54px] ">
-                {page.title}
+                {page?.title}
               </h2>
             </div>
           </CarouselItem>
-          {page.slides.map((card: any, idx: number) => {
+          {page?.slides.map((card: any, idx: number) => {
             return card.type === "file" ? (
               <CarouselItem key={idx} className="h-svh ">
                 <div className="flex h-svh">
@@ -81,7 +81,7 @@ function ProjectPage({
                 </div>
               </CarouselItem>
             ) : (
-              <CarouselItem key={page.title} className="max-w-[900px]">
+              <CarouselItem key={page?.title} className="max-w-[900px]">
                 <div className="flex h-full flex-col items-center justify-center ">
                   <h2 className="text-center font-lamore text-2xl font-normal uppercase leading-tight md:text-[54px]">
                     {card[card.type].content}

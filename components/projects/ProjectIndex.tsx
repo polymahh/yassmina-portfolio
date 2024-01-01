@@ -21,7 +21,7 @@ function ProjectList({
   }
   return (
     <div className="flex flex-col gap-4">
-      {data.map((card: projectType, idx: number) => {
+      {data?.map((card: projectType, idx: number) => {
         return (
           <ProjectCard
             key={card.title}
