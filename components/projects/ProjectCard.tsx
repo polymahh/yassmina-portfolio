@@ -35,9 +35,7 @@ function ProjectCard({
 
   const titleAnimation = {
     rest: {
-      paddingTop: 0,
-      paddingBottom: 0,
-
+      height: 80,
       transition: {
         duration: 0.3,
         type: "tween",
@@ -45,9 +43,7 @@ function ProjectCard({
       },
     },
     hover: {
-      paddingTop: 40,
-      paddingBottom: 40,
-
+      height: 120,
       transition: {
         duration: 0.3,
         type: "tween",
@@ -58,25 +54,24 @@ function ProjectCard({
 
   return (
     <motion.div
-      className={`flex w-full  items-center bg-[url('/img/hero-pattern.svg')]  justify-between gap-2 hover:cursor-pointer`}
+      className={`flex flex-col md:flex-row w-full  items-center  w-full justify-between hover:cursor-pointer `}
       onClick={() => handleClick(idx)}
+      variants={titleAnimation}
       initial="rest"
       whileHover="hover"
-      animate="rest"
     >
-      <motion.h1
-        className="font-lamore text-4xl font-normal uppercase leading-tight tracking-tighter max-w-[] md:text-[54px]"
-        variants={titleAnimation}
-      >
+      <h1 className="font-lamore text-4xl text-center md:text-left font-normal uppercase leading-none lg:text-[54px]">
         {card.title}
-      </motion.h1>
+      </h1>
       <motion.div
         variants={imageAnimation}
-        className="opacity-0 absolute left-1/2"
+        className="opacity-0 hidden md:flex  "
       >
         <Image src={card.preview} alt="preview" height="120" width="300" />
       </motion.div>
-      <span className=" text-2xl text-accent-foreground">{card.location}</span>
+      <span className=" text-lg lg:text-2xl text-right text-accent-foreground">
+        {card.location}
+      </span>
     </motion.div>
   )
 }

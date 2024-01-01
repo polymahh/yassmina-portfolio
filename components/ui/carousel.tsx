@@ -56,7 +56,6 @@ const Carousel = React.forwardRef<
     const [carouselRef, api] = useEmblaCarousel(
       {
         ...opts,
-        align: "center",
         axis: orientation === "horizontal" ? "x" : "y",
       },
       plugins
@@ -180,7 +179,7 @@ const CarouselItem = React.forwardRef<
       role="group"
       aria-roledescription="slide"
       className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full max-w-[1120px] ",
+        "min-w-0 shrink-0 grow-0 basis-full ",
         orientation === "horizontal" ? "pl-4" : "pt-4",
         className
       )}
@@ -208,7 +207,7 @@ const CarouselPrevious = React.forwardRef<
       // )}
       className={buttonVariants({
         variant: "carousel",
-        className: "-left-0 top-0 h-full",
+        className: className,
       })}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
@@ -240,7 +239,7 @@ const CarouselNext = React.forwardRef<
       // )}
       className={buttonVariants({
         variant: "carousel",
-        className: "-right-0 top-0 h-full",
+        className: className,
       })}
       disabled={!canScrollNext}
       onClick={scrollNext}

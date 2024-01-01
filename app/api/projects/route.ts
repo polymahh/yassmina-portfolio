@@ -1,4 +1,5 @@
 import { Client } from "@notionhq/client"
+import { NextResponse } from "next/server"
 
 const notionSecret = process.env.NOTION_SECRET
 const projectsDB = process.env.NOTION_DB_PROJECTS as string
@@ -8,7 +9,8 @@ const notion = new Client({auth:notionSecret})
 export async function GET(req:Request){
 
     if(!notionSecret || !projectsDB){
-        Response.json({  message: "missing secret or database id"}, {status : 500})
+        return NextResponse.json({  message: "missing secret or database id"}, {status : 500})
+
     }
     try {
         const query = await notion.databases.query({
@@ -28,9 +30,9 @@ export async function GET(req:Request){
                 slides: slides
             }
         })
-        return Response.json({data:structuredData,message:"projects"},{status:201})
+        return NextResponse.json({data:structuredData,message:"projects"},{status:201})
     } catch (error) {
-        return Response.json({  message: "something went wrong!"}, {status : 500})
+        return NextResponse.json({  message: "something went wrong!"}, {status : 500})
     }
 
     

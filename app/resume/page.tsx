@@ -6,7 +6,7 @@ import { Button, buttonVariants } from "@/components/ui/button"
 
 function page() {
   return (
-    <section className="container flex max-w-[1116px] justify-between  gap-6 pb-8 pt-20 md:py-10">
+    <section className="container flex max-w-[1116px] justify-between flex-wrap-reverse md:flex-nowrap  gap-6 pb-8 pt:8 md:pt-20 ">
       <div className="flex  flex-col items-start justify-center ">
         <h1 className="font-lamore text-4xl uppercase">
           Hi, I&apos;m Yasmina

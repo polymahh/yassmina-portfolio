@@ -1,6 +1,7 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import axios from "axios"
 import { Mail, Paperclip, Phone, Send } from "lucide-react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -24,8 +25,8 @@ const contactSchema = z.object({
     message: "name must be at least 2 characters.",
   }),
   email: z.string().email(),
-  subject: z.string().min(2, {
-    message: "subject must be at least 2 characters.",
+  subject: z.string().min(1, {
+    message: "must have a subject.",
   }),
   message: z.string().min(2, {
     message: "subject must be at least 2 characters.",
@@ -44,7 +45,11 @@ export function ContactForm() {
     },
   })
 
-  const onSubmit = () => {}
+  const onSubmit = (values: z.infer<typeof contactSchema>) => {
+    console.log(values)
+
+    axios.post("/api/email", values).catch((error) => console.log(error))
+  }
 
   return (
     <Form {...form}>
@@ -84,7 +89,7 @@ export function ContactForm() {
 
           <FormField
             control={form.control}
-            name="email"
+            name="subject"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="uppercase">subject</FormLabel>

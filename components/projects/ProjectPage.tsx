@@ -26,7 +26,7 @@ function ProjectPage({
 }) {
   console.log("🚀 ~ file: ProjectPage.tsx:25 ~ page:", page)
   return (
-    <div className="relative w-screen h-screen flex justify-center items-start bg-white z-40">
+    <div className="relative w-screen h-screen flex justify-center items-start bg-white z-40 overflow-hidden">
       <div className="absolute w-full flex p-9 justify-center">
         <Button
           className={buttonVariants({
@@ -46,33 +46,51 @@ function ProjectPage({
           className="z-20"
         />
       </div>
-      <Carousel>
+      <Carousel
+        opts={{
+          align: "center",
+        }}
+      >
         <CarouselContent>
+          <CarouselItem key={page.title} className="max-w-[900px]">
+            <div className="flex flex-col items-center justify-center h-full  ">
+              <span className=" text-2xl text-accent-foreground">
+                {page.location}
+              </span>
+              <h2 className="font-lamore text-9xl font-normal  text-center uppercase  md:text-[54px] ">
+                {page.title}
+              </h2>
+            </div>
+          </CarouselItem>
           {page.slides.map((card: any, idx: number) => {
-            return (
-              <CarouselItem key={idx} className="w-2/3">
-                {card.type === "file" ? (
-                  <div className="flex w-screen">
-                    <Image
-                      src={card[card.type].url}
-                      width={1120}
-                      height={509}
-                      alt={card.title}
-                    />
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-center ">
-                    <h2 className="font-lamore text-4xl font-normal uppercase leading-tight tracking-tighter md:text-[54px] mt-8">
-                      {card[card.type].content}
-                    </h2>
-                  </div>
-                )}
+            return card.type === "file" ? (
+              <CarouselItem key={idx} className="h-svh ">
+                <div className="flex h-svh">
+                  <Image
+                    src={card[card.type].url}
+                    alt={card.title}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              </CarouselItem>
+            ) : (
+              <CarouselItem key={page.title} className="max-w-[900px]">
+                <div className="flex flex-col items-center justify-center h-full ">
+                  <h2 className="font-lamore text-2xl font-normal text-center leading-tight uppercase md:text-[54px]">
+                    {card[card.type].content}
+                  </h2>
+                </div>
               </CarouselItem>
             )
           })}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
     </div>
   )

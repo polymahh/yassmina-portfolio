@@ -20,7 +20,7 @@ function ProjectList({
     setShowPage(true)
   }
   return (
-    <div className="flex flex-col gap-9">
+    <div className="flex flex-col gap-4">
       {data.map((card: projectType, idx: number) => {
         return (
           <ProjectCard

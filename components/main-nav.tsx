@@ -4,6 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { useTheme } from "next-themes"
 
@@ -19,6 +20,22 @@ interface MainNavProps {
   items?: NavItem[]
 }
 
+const headerAnimation = {
+  rest: {
+    opacity: 0,
+    y: 20,
+  },
+  motion: {
+    opacity: 1,
+    y: 0,
+    trasition: {
+      duration: 2,
+      type: "tween",
+      ease: "easeOut",
+    },
+  },
+}
+
 export function MainNav({ items }: MainNavProps) {
   const [open, setOpen] = React.useState(false)
   const path = usePathname()
@@ -31,31 +48,38 @@ export function MainNav({ items }: MainNavProps) {
     setOpen((prev) => !prev)
   }
   return (
-    <div className="flex justify-between w-full gap-6 md:gap-10">
+    <motion.div
+      className="flex justify-between w-full gap-6 md:gap-10"
+      variants={headerAnimation}
+      initial="rest"
+      animate={"motion"}
+    >
       <Link href="/" className="flex items-center space-x-2 z-40">
         <Image src="/logo_black.png" alt="logo" height={36} width={146} />
       </Link>
 
       {items?.length ? (
-        <nav className="flex gap-16 items-center ">
+        <motion.nav className="flex gap-16 items-center ">
           {items?.map(
             (item, index) =>
               item.href && (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className={buttonVariants({
-                    variant: "link",
-                    size: "link",
-                    className: `uppercase ${
-                      path.includes(item.title.toLowerCase())
-                        ? "underline"
-                        : "text-muted-foreground"
-                    }`,
-                  })}
-                >
-                  {item.title}
-                </Link>
+                <motion.div className="hidden md:flex">
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className={buttonVariants({
+                      variant: "link",
+                      size: "link",
+                      className: `uppercase ${
+                        path.includes(item.title.toLowerCase())
+                          ? "underline"
+                          : "text-muted-foreground"
+                      }`,
+                    })}
+                  >
+                    {item.title}
+                  </Link>
+                </motion.div>
               )
           )}
           <Button
@@ -68,9 +92,9 @@ export function MainNav({ items }: MainNavProps) {
           >
             {open ? <X className="w-8 " /> : <Menu className="w-8 " />}
           </Button>
-        </nav>
+        </motion.nav>
       ) : null}
-      {open ? <MobileMenu /> : null}
-    </div>
+      <MobileMenu open={open} />
+    </motion.div>
   )
 }
