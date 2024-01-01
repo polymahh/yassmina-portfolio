@@ -5,9 +5,12 @@ import axios from "axios"
 import Projects from "@/components/projects/Projects"
 
 const getProjects = async () => {
-  const responce = await fetch(`${process.env.VERCEL_URL}/api/projects`, {
-    cache: "force-cache",
-  })
+  const responce = await fetch(
+    `https://${process.env.VERCEL_URL}/api/projects`,
+    {
+      cache: "force-cache",
+    }
+  )
 
   return responce.json()
 }
