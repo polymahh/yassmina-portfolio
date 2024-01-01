@@ -11,7 +11,7 @@ const projectsDB = process.env.NOTION_DB_PROJECTS as string
 
 const notion = new Client({ auth: notionSecret })
 
-export async function getProjects() {
+async function getProjects() {
   if (!notionSecret || !projectsDB) {
     return NextResponse.json(
       { message: "missing secret or database id" },
