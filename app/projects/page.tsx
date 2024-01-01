@@ -6,7 +6,7 @@ import Projects from "@/components/projects/Projects"
 
 async function page() {
   const responce = await axios
-    .get("http://localhost:3000/api/projects")
+    .get(`${process.env.BASE_URL}/api/projects`)
     .catch((err) => console.log(err))
   console.log("🚀 ~ file: page.tsx:11 ~ page ~ data:", responce)
   return (
