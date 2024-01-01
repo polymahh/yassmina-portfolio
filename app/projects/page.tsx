@@ -14,7 +14,7 @@ const getProjects = async () => {
 
   return responce.json()
 }
-export const dynamic = "force-dynamic"
+// export const dynamic = "force-dynamic"
 async function page() {
   const data = await getProjects()
   console.log("🚀 ~ file: page.tsx:11 ~ page ~ data:", data)
