@@ -50,7 +50,7 @@ async function getProjects() {
   }
 }
 
-// export const dynamic = "force-dynamic"
+export const dynamic = "force-static"
 async function page() {
   const data = await getProjects()
   return (
