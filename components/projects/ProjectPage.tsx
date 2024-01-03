@@ -76,12 +76,13 @@ function ProjectPage({
           {page?.slides.map((card: any, idx: number) => {
             return card.type === "file" ? (
               <CarouselItem key={idx} className="h-svh ">
-                <div className="flex h-svh">
+                <div className="flex h-svh relative">
                   <Image
                     src={card[card.type].url}
                     alt={card.title}
                     width={0}
                     height={0}
+                    sizes="100vw"
                     style={{
                       width: "100%",
                       height: "auto",
@@ -103,13 +104,13 @@ function ProjectPage({
           })}
           <CarouselItem key={nextPage?.title} className="max-w-[900px]">
             <div className="flex h-full flex-col items-center justify-center  ">
-              <span
-                className=" text-2xl text-accent-foreground"
-                onClick={() => setPage(index + 1)}
-              >
+              <span className=" text-2xl text-accent-foreground">
                 {nextPage?.location}
               </span>
-              <h2 className="text-center font-lamore text-4xl  font-normal uppercase  md:text-[54px]  ">
+              <h2
+                className="text-center font-lamore text-4xl  font-normal uppercase  md:text-[54px]  "
+                onClick={() => setPage(index + 1)}
+              >
                 {nextPage?.title}
               </h2>
             </div>
