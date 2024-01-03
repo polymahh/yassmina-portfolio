@@ -1,8 +1,6 @@
 import React from "react"
-import Link from "next/link"
 import { NextResponse } from "next/server"
 import { Client } from "@notionhq/client"
-import axios from "axios"
 
 import Projects from "@/components/projects/Projects"
 

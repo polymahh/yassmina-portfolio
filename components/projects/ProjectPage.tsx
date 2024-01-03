@@ -33,9 +33,9 @@ function ProjectPage({
   const [api, setApi] = React.useState<CarouselApi>()
   React.useEffect(() => {
     if (!api) {
-      console.log("api testt tt ttt")
-    } else api.scrollTo(1)
-  }, [api])
+      return
+    } else api.scrollTo(0)
+  }, [page])
   return (
     <div className="relative z-40 flex h-screen w-screen items-start justify-center overflow-hidden bg-white">
       <div className="absolute flex w-full justify-center p-9">
@@ -58,6 +58,7 @@ function ProjectPage({
         />
       </div>
       <Carousel
+        setApi={setApi}
         opts={{
           align: "center",
         }}
@@ -108,7 +109,7 @@ function ProjectPage({
                 {nextPage?.location}
               </span>
               <h2
-                className="text-center font-lamore text-4xl  font-normal uppercase  md:text-[54px]  "
+                className="text-center font-lamore text-4xl cursor-pointer font-normal uppercase  md:text-[54px]  "
                 onClick={() => setPage(index + 1)}
               >
                 {nextPage?.title}
