@@ -13,20 +13,38 @@ import {
 import { Button } from "../ui/button"
 import { projectType } from "./type"
 
-function ProjectCarousel({ data }: { data: projectType[] }) {
+function ProjectCarousel({
+  data,
+  setPage,
+  setShowPage,
+}: {
+  data: projectType[]
+  setPage: any
+  setShowPage: any
+}) {
+  const handleClick = (idx: number) => {
+    console.log(idx)
+    setPage(data[idx])
+    setShowPage(true)
+  }
   return (
     <div className="flex justify-center">
       <Carousel
         opts={{
           align: "center",
+          skipSnaps: true,
+          breakpoints: { lg: { skipSnaps: true } },
         }}
       >
-        <CarouselContent className=" max-w-[1100px]">
+        <CarouselContent className="  max-w-[1100px]">
           {data.map((card: projectType, idx: number) => {
             return (
-              <CarouselItem key={card.title} className="max-w-[1000px]">
-                <div className="flex flex-col items-center  ">
-                  <div className="h-[450px] overflow-hidden">
+              <CarouselItem key={card.title} className="max-w-[800px]">
+                <div className="flex flex-col items-center   ">
+                  <div
+                    className="  overflow-hidden cursor-pointer"
+                    onClick={() => handleClick(idx)}
+                  >
                     <Image
                       src={card.preview}
                       alt="project preview"
@@ -42,7 +60,10 @@ function ProjectCarousel({ data }: { data: projectType[] }) {
                     />
                   </div>
 
-                  <h2 className="mt-8 text-center font-lamore text-4xl font-normal uppercase leading-tight tracking-tighter md:text-[54px]">
+                  <h2
+                    onClick={() => handleClick(idx)}
+                    className="mt-8 cursor-pointer text-center font-lamore text-4xl font-normal uppercase leading-tight tracking-tighter md:text-[54px]"
+                  >
                     {card.title}
                   </h2>
                   <span className=" text-2xl text-accent-foreground">

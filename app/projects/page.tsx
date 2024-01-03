@@ -54,7 +54,7 @@ export const dynamic = "force-static"
 async function page() {
   const data = await getProjects()
   return (
-    <section className="container flex h-full flex-col justify-between gap-6 pb-8 pt-6 md:py-10">
+    <section className="md:container flex h-full flex-col justify-between gap-6 md:pb-8 md:pt-6 md:py-10">
       <Projects data={data} />
     </section>
   )

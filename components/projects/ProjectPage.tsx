@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { MoveLeft } from "lucide-react"
@@ -19,12 +19,23 @@ import { projectType } from "./type"
 
 function ProjectPage({
   page,
+  nextPage,
+  index,
+  setPage,
   setShowPage,
 }: {
   page: projectType
+  nextPage: projectType
+  index: number
+  setPage: any
   setShowPage: any
 }) {
-  console.log("🚀 ~ file: ProjectPage.tsx:25 ~ page:", page)
+  const [api, setApi] = React.useState<CarouselApi>()
+  React.useEffect(() => {
+    if (!api) {
+      console.log("api testt tt ttt")
+    } else api.scrollTo(1)
+  }, [api])
   return (
     <div className="relative z-40 flex h-screen w-screen items-start justify-center overflow-hidden bg-white">
       <div className="absolute flex w-full justify-center p-9">
@@ -57,7 +68,7 @@ function ProjectPage({
               <span className=" text-2xl text-accent-foreground">
                 {page?.location}
               </span>
-              <h2 className="text-center font-lamore text-9xl  font-normal uppercase  md:text-[54px] ">
+              <h2 className="text-center font-lamore text-4xl  font-normal uppercase  md:text-[54px] ">
                 {page?.title}
               </h2>
             </div>
@@ -71,25 +82,38 @@ function ProjectPage({
                     alt={card.title}
                     width={0}
                     height={0}
-                    sizes="100vw"
                     style={{
                       width: "100%",
                       height: "auto",
                       objectFit: "cover",
                     }}
+                    priority={true}
                   />
                 </div>
               </CarouselItem>
             ) : (
               <CarouselItem key={page?.title} className="max-w-[900px]">
                 <div className="flex h-full flex-col items-center justify-center ">
-                  <h2 className="text-center font-lamore text-2xl font-normal uppercase leading-tight md:text-[54px]">
+                  <p className="text-center font-sans text-2xl leading-none max-w-[600px]">
                     {card[card.type].content}
-                  </h2>
+                  </p>
                 </div>
               </CarouselItem>
             )
           })}
+          <CarouselItem key={nextPage?.title} className="max-w-[900px]">
+            <div className="flex h-full flex-col items-center justify-center  ">
+              <span
+                className=" text-2xl text-accent-foreground"
+                onClick={() => setPage(index + 1)}
+              >
+                {nextPage?.location}
+              </span>
+              <h2 className="text-center font-lamore text-4xl  font-normal uppercase  md:text-[54px]  ">
+                {nextPage?.title}
+              </h2>
+            </div>
+          </CarouselItem>
         </CarouselContent>
       </Carousel>
     </div>

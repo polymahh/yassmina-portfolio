@@ -54,26 +54,47 @@ export function MainNav({ items }: MainNavProps) {
       </Link>
 
       {items?.length ? (
-        <motion.nav className="flex items-center gap-16 ">
+        <motion.nav className="flex items-center gap-16  ">
           {items?.map(
             (item, index) =>
               item.href && (
-                <motion.div key={item.title} className="hidden md:flex">
-                  <Link
-                    key={index}
-                    href={item.href}
-                    className={buttonVariants({
-                      variant: "link",
-                      size: "link",
-                      className: `uppercase ${
-                        path.includes(item.title.toLowerCase())
-                          ? "underline"
-                          : "text-muted-foreground"
-                      }`,
-                    })}
+                <motion.div
+                  key={item.title}
+                  className="hidden relative md:flex"
+                >
+                  <motion.div
+                    initial={{ opacity: 1 }}
+                    animate={
+                      path.includes(item.title.toLowerCase())
+                        ? { opacity: 0 }
+                        : { opacity: 1 }
+                    }
                   >
-                    {item.title}
-                  </Link>
+                    <Link
+                      key={index}
+                      href={item.href}
+                      className={buttonVariants({
+                        variant: "link",
+                        size: "link",
+                        className: `uppercase text-muted-foreground`,
+                      })}
+                    >
+                      {item.title}
+                    </Link>
+                  </motion.div>
+
+                  {path.includes(item.title.toLowerCase()) && (
+                    <motion.div
+                      layoutId="nav-item"
+                      className={buttonVariants({
+                        variant: "link",
+                        size: "link",
+                        className: "absolute  uppercase underline ",
+                      })}
+                    >
+                      {item.title}
+                    </motion.div>
+                  )}
                 </motion.div>
               )
           )}

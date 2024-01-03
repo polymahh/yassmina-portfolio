@@ -16,7 +16,7 @@ function ProjectList({
 
   const handleClick = (idx: number) => {
     console.log(idx)
-    setPage(data[idx])
+    setPage(idx)
     setShowPage(true)
   }
   return (
