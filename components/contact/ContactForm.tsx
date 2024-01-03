@@ -19,6 +19,8 @@ import {
 
 import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
+import { Toaster } from "../ui/toaster"
+import { toast } from "../ui/use-toast"
 
 const contactSchema = z.object({
   name: z.string().min(2, {
@@ -45,10 +47,17 @@ export function ContactForm() {
     },
   })
 
-  const onSubmit = (values: z.infer<typeof contactSchema>) => {
-    console.log(values)
+  const onSubmit = async (values: z.infer<typeof contactSchema>) => {
+    const res = await axios
+      .post("/api/email", values)
+      .catch((error) => console.log(error))
 
-    axios.post("/api/email", values).catch((error) => console.log(error))
+    if (res?.status === 201) {
+      toast({
+        title: "Message sent Successfully",
+        variant: "success",
+      })
+    }
   }
 
   return (
@@ -113,7 +122,7 @@ export function ContactForm() {
               </FormItem>
             )}
           />
-          <FormField
+          {/* <FormField
             control={form.control}
             name="file"
             render={({ field }) => (
@@ -127,8 +136,8 @@ export function ContactForm() {
                 <FormMessage />
               </FormItem>
             )}
-          />
-          <div className="flex justify-between">
+          /> */}
+          <div className="flex mt-4 justify-between">
             <Button
               className={buttonVariants({
                 variant: "square",
@@ -151,6 +160,7 @@ export function ContactForm() {
           </div>
         </form>
       </div>
+      <Toaster />
     </Form>
   )
 }

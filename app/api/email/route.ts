@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     // cc: email, (uncomment this line if you want to send a copy to the sender)
     attachments:file,
     subject: subject,
-    text: message,
+    text: `from: ${email} \n message: ${message}`,
   };
 
   const sendMailPromise = () =>
@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 
   try {
     await sendMailPromise();
-    return NextResponse.json({ message: 'Email sent' });
+    return NextResponse.json({ message: 'Email sent' },{ status: 201 });
   } catch (err) {
     return NextResponse.json({ error: err }, { status: 500 });
   }
