@@ -62,10 +62,10 @@ export function ContactForm() {
 
   return (
     <Form {...form}>
-      <div className="flex justify-center">
+      <div className="flex justify-center pb-6">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex w-[888px] flex-col gap-8"
+          className="flex sm:w-[888px] flex-col gap-8"
         >
           <div className="flex flex-wrap gap-6 sm:flex-nowrap">
             <FormField
@@ -137,7 +137,7 @@ export function ContactForm() {
               </FormItem>
             )}
           /> */}
-          <div className="flex mt-4 justify-between">
+          <div className="flex flex-wrap mt-4 justify-center gap-8 sm:justify-between">
             <Button
               className={buttonVariants({
                 variant: "square",
@@ -150,11 +150,11 @@ export function ContactForm() {
             <div>
               <div className="flex items-center gap-2 pb-6">
                 <Phone />
-                <span className="text-xl">(+212) 634 259 698</span>
+                <span className="sm:text-xl">(+212) 698 187 514</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail />
-                <span className="text-xl">Hello@Yasmina.com</span>
+                <span className="sm:text-xl">elalaouiyasmina@gmail.com</span>
               </div>
             </div>
           </div>

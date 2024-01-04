@@ -1,5 +1,6 @@
 import React from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { NextResponse } from "next/server"
 import { Client } from "@notionhq/client"
 import { Download } from "lucide-react"
@@ -32,12 +33,18 @@ async function getResume() {
       }
     })
 
-    return structuredData
+    return structuredData[0]
   } catch (error) {
     console.log(error)
   }
 }
 
+interface resumeType {
+  title: String
+  description: String
+  cv: String
+  image: String
+}
 export const dynamic = "force-static"
 async function page() {
   const resume = await getResume()
@@ -47,30 +54,25 @@ async function page() {
     <section className="pt:8 container flex max-w-[1116px] flex-wrap-reverse justify-between  gap-6 pb-8 md:flex-nowrap md:pt-20 ">
       <div className="flex  flex-col items-start justify-center ">
         <h1 className="font-lamore text-4xl uppercase">
-          Hi, I&apos;m Yasmina
-          <br />
-          El Alaoui Ismaili,
+          Hi, I&apos;m YASMINA
+          <br /> EL ALAOUI ISMAILI
         </h1>
         <p className=" max-w-[544px] pb-12 pt-6 text-sm leading-7	">
-          an architect based in Tangier. I specialize in innovative designs that
-          seamlessly blend form and function. With a strong foundation in
-          architectural principles and a commitment to excellence, I bring a
-          fresh perspective to every project.
-          <br />
-          My keen eye for detail and proficiency in design tools make me a
-          valuable asset in creating unique and impactful spaces.
+          {resume?.description}
         </p>
-        <Button
+        <Link
           className={buttonVariants({
             variant: "square",
           })}
+          href={resume?.cv}
+          download
         >
           <Download />{" "}
           <span className="pl-2 font-light">Download my resume</span>
-        </Button>
+        </Link>
       </div>
       <div>
-        <Image src={"/images/agent.png"} alt="girl" width={434} height={655} />
+        <Image src={resume?.image} alt="picture" width={434} height={655} />
       </div>
     </section>
   )

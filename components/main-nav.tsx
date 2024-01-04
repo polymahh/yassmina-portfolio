@@ -110,7 +110,7 @@ export function MainNav({ items }: MainNavProps) {
           </Button>
         </motion.nav>
       ) : null}
-      <MobileMenu open={open} />
+      <MobileMenu open={open} setOpen={setOpen} />
     </motion.div>
   )
 }
