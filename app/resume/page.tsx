@@ -11,13 +11,15 @@ const notionSecret = process.env.NOTION_SECRET
 const projectsDB = process.env.NOTION_DB_RESUME as string
 
 const notion = new Client({ auth: notionSecret })
-
+interface resumeType {
+  title: String
+  description: String
+  cv: String
+  image: String
+}
 async function getResume() {
   if (!notionSecret || !projectsDB) {
-    return NextResponse.json(
-      { message: "missing secret or database id" },
-      { status: 500 }
-    )
+    return
   }
   try {
     const query = await notion.databases.query({
@@ -33,22 +35,16 @@ async function getResume() {
       }
     })
 
-    return structuredData[0]
+    return structuredData
   } catch (error) {
     console.log(error)
   }
 }
 
-interface resumeType {
-  title: String
-  description: String
-  cv: String
-  image: String
-}
-export const dynamic = "force-static"
+// export const dynamic = "force-static"
 async function page() {
-  const resume = await getResume()
-  console.log("🚀 ~ file: page.tsx:56 ~ page ~ getResume:", resume)
+  const response = await getResume()
+  const resume = response?.[0]
 
   return (
     <section className="pt:8 container flex max-w-[1116px] flex-wrap-reverse justify-between  gap-6 pb-8 md:flex-nowrap md:pt-20 ">
