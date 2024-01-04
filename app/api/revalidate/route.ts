@@ -5,7 +5,8 @@ export async function GET(request: NextRequest) {
   const secret = request.nextUrl.searchParams.get('secret')
  
   if (secret === process.env.MY_PASSWORD) {
-    revalidatePath("/")
+    revalidatePath("/porjects")
+    revalidatePath("/resume")
     return NextResponse.json({ revalidated: true, message : "success! new data will show after couple refreshes" })
   }
  
