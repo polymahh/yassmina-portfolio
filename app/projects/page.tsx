@@ -19,6 +19,12 @@ async function getProjects() {
   try {
     const query = await notion.databases.query({
       database_id: projectsDB,
+      sorts: [
+        {
+          timestamp: "created_time",
+          direction: "ascending",
+        },
+      ],
     })
 
     const structuredData = query.results.map((project: any) => {
