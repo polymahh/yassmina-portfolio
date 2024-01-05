@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import Image from "next/image"
+import { useSearchParams } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
@@ -18,6 +19,15 @@ function Projects({ data }: any) {
   const [showpage, setShowPage] = useState(false)
   const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(true)
+
+  const params = useSearchParams()
+  const loaded = params.get("loaded")
+
+  useEffect(() => {
+    if (loaded === "true") {
+      setLoading(false)
+    }
+  }, [])
 
   return (
     <AnimatePresence>
