@@ -41,7 +41,10 @@ function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
           <span className="text-xl">(+212) 698 187 514</span>
           <span className="text-xl">elalaouiyasmina@gmail.com</span>
           <div className="flex gap-4 pt-8">
-            <Link href="https://www.instagram.com/yas.dwg" target="_blank">
+            <Link
+              href="https://www.linkedin.com/in/yasmina-el-alaoui-48927a163/"
+              target="_blank"
+            >
               <Linkedin />
             </Link>
             <Link href="https://www.instagram.com/yas.dwg" target="_blank">

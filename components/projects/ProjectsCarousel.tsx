@@ -6,6 +6,7 @@ import "swiper/css"
 import "swiper/css/effect-coverflow"
 import "swiper/css/pagination"
 import Image from "next/image"
+import { motion } from "framer-motion"
 
 import { projectType } from "./type"
 
@@ -55,12 +56,13 @@ function ProjectsCarousel({
           return (
             <SwiperSlide key={card.title} style={{ width: "80%" }}>
               <div className="flex md:grid  flex-col items-center h-full ">
-                <div
+                <motion.div
+                  layoutId={idx === 0 ? "center-image" : ""}
                   className="flex justify-center overflow-hidden cursor-pointer h-full md:h-auto md:w-full"
                   onClick={() => handleClick(idx)}
                 >
                   <Image
-                    src={card.preview}
+                    src={idx === 0 ? "/images/center.jpg" : card.preview}
                     alt="project preview"
                     width={0}
                     height={0}
@@ -72,7 +74,7 @@ function ProjectsCarousel({
                     }}
                     priority={true}
                   />
-                </div>
+                </motion.div>
                 <div className="flex flex-col items-center border border-white  bg-white">
                   <h2
                     onClick={() => handleClick(idx)}
