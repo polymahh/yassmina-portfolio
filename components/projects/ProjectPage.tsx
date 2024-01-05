@@ -37,7 +37,7 @@ function ProjectPage({
     } else api.scrollTo(0)
   }, [page])
   return (
-    <div className="relative z-40 flex h-screen w-screen items-start justify-center overflow-hidden bg-white">
+    <div className="fixed top-0 left-0 z-40  h-screen w-screen items-start justify-center overflow-hidden bg-white">
       <div className="absolute flex w-full justify-center p-9">
         <Button
           className={buttonVariants({
