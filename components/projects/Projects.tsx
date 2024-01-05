@@ -31,71 +31,70 @@ function Projects({ data }: any) {
 
   return (
     <AnimatePresence>
-      {loading ? (
-        <motion.div
-          className="absolute top-0  w-full h-full hidden md:block"
-          key={"loader"}
-        >
-          <Loading setLoading={setLoading} />
-        </motion.div>
-      ) : (
-        <div className="flex h-full flex-col justify-between">
-          {index ? (
-            <ProjectIndex
+      <div className="flex h-full flex-col justify-between">
+        {index ? (
+          <ProjectIndex
+            data={data}
+            setPage={setPage}
+            setShowPage={setShowPage}
+          />
+        ) : (
+          <>
+            <ProjectsCarousel
               data={data}
               setPage={setPage}
               setShowPage={setShowPage}
             />
-          ) : (
-            <>
-              <ProjectsCarousel
-                data={data}
-                setPage={setPage}
-                setShowPage={setShowPage}
-              />
-            </>
-          )}
-          <div className="flex gap-4 mt-4 pl-4">
-            <Button
-              className={buttonVariants({
-                size: "link",
-                variant: "link",
-                className: `uppercase ${
-                  index ? "underline" : "text-muted-foreground"
-                }`,
-              })}
-              onClick={() => setIndex(true)}
-            >
-              index
-            </Button>
-            <Button
-              className={buttonVariants({
-                size: "link",
-                variant: "link",
-                className: `uppercase ${
-                  !index ? "underline" : "text-muted-foreground"
-                }`,
-              })}
-              onClick={() => setIndex(false)}
-            >
-              galirie
-            </Button>
-          </div>
-          <div
-            className={cn(
-              "absolute left-0 top-0",
-              !!showpage ? "flex" : "hidden"
-            )}
+          </>
+        )}
+        <div className="flex gap-4 mt-4 pl-4">
+          <Button
+            className={buttonVariants({
+              size: "link",
+              variant: "link",
+              className: `uppercase ${
+                index ? "underline" : "text-muted-foreground"
+              }`,
+            })}
+            onClick={() => setIndex(true)}
           >
-            <ProjectPage
-              page={data[page]}
-              nextPage={data[page + 1]}
-              index={page}
-              setPage={setPage}
-              setShowPage={setShowPage}
-            />
-          </div>
+            index
+          </Button>
+          <Button
+            className={buttonVariants({
+              size: "link",
+              variant: "link",
+              className: `uppercase ${
+                !index ? "underline" : "text-muted-foreground"
+              }`,
+            })}
+            onClick={() => setIndex(false)}
+          >
+            galirie
+          </Button>
         </div>
+        <div
+          className={cn(
+            "absolute left-0 top-0",
+            !!showpage ? "flex" : "hidden"
+          )}
+        >
+          <ProjectPage
+            page={data[page]}
+            nextPage={data[page + 1]}
+            index={page}
+            setPage={setPage}
+            setShowPage={setShowPage}
+          />
+        </div>
+      </div>
+      {loading && (
+        <motion.div
+          className="absolute top-0 z-20 overflow-hidden w-full h-full hidden md:block"
+          key={"loader"}
+        >
+          <Loading setLoading={setLoading} />
+        </motion.div>
       )}
     </AnimatePresence>
   )

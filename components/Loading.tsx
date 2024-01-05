@@ -10,6 +10,14 @@ const container = {
       stagerchildren: 0.35,
     },
   },
+  exit: {
+    opacity: 0,
+    Y: 200,
+    transition: {
+      ease: "easeInOut",
+      deration: 0.8,
+    },
+  },
 }
 
 const item = {
@@ -51,7 +59,7 @@ const centerImage = {
 function Loading({ setLoading }: any) {
   return (
     <motion.div
-      className="flex relative justify-center items-center h-full w-full p-8  overflow-hidden "
+      className="flex relative justify-center bg-white items-center h-full w-full p-8  overflow-hidden "
       initial="hidden"
       animate="show"
       exit="exit"

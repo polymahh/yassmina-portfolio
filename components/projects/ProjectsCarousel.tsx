@@ -29,7 +29,6 @@ function ProjectsCarousel({
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
-        // loop={true}
         centeredSlides={true}
         slidesPerView={"auto"}
         breakpoints={{
