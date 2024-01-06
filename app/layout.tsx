@@ -70,7 +70,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <SiteHeader />
               <div className=" h-[calc(100vh-112px)] ">{children}</div>
             </div>
-            <TailwindIndicator />
+            {/* <TailwindIndicator /> */}
           </ThemeProvider>
         </body>
       </html>

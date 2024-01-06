@@ -1,12 +1,13 @@
 import React from "react"
 import { EffectCoverflow, Pagination } from "swiper/modules"
-import { Swiper, SwiperSlide } from "swiper/react"
+import { Swiper, SwiperSlide, useSwiperSlide } from "swiper/react"
 
 import "swiper/css"
 import "swiper/css/effect-coverflow"
 import "swiper/css/pagination"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { useSwiper } from "swiper/react"
 
 import { projectType } from "./type"
 
@@ -24,6 +25,7 @@ function ProjectsCarousel({
     setPage(idx)
     setShowPage(true)
   }
+
   return (
     <>
       <Swiper
@@ -45,11 +47,9 @@ function ProjectsCarousel({
           depth: 120,
           modifier: 1,
           slideShadows: false,
-          //   scale: 0.8,
         }}
-        // pagination={true}
         modules={[EffectCoverflow, Pagination]}
-        className="mySwiper w-full md:w-[90%] grow "
+        className="mySwiper w-full md:w-[90%] grow md:max-h-[900px]  "
       >
         {data.map((card: projectType, idx: number) => {
           return (
@@ -89,9 +89,28 @@ function ProjectsCarousel({
             </SwiperSlide>
           )
         })}
+        <Controls />
       </Swiper>
     </>
   )
 }
 
 export default ProjectsCarousel
+
+const Controls = () => {
+  const swipe = useSwiper()
+  return (
+    <>
+      {/* prev */}
+      <div
+        className="absolute top-0 left-0 z-10 bg-white/20 hover:bg-white/40 cursor-pointer h-full w-[10%]"
+        onClick={() => swipe.slidePrev()}
+      ></div>
+      {/* next */}
+      <div
+        className="absolute top-0 right-0 z-10 bg-white/20 hover:bg-white/40 cursor-pointer h-full w-[10%]"
+        onClick={() => swipe.slideNext()}
+      ></div>
+    </>
+  )
+}

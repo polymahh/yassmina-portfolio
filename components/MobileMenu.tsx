@@ -16,8 +16,8 @@ const menuAnimation = {
       damping: 40,
     },
   },
-  open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at calc(100% - 10px) 10px)`,
+  open: (height = 10000) => ({
+    clipPath: `circle(${height * 2}px at calc(100% - 10px) 10px)`,
     transition: {
       duration: 1.5,
       type: "spring",
@@ -30,7 +30,7 @@ const menuAnimation = {
 function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
   return (
     <motion.div
-      className="fixed -right-0 top-0 bottom-0 flex h-svh w-svw justify-center  overflow-hidden bg-popover"
+      className="fixed -right-0 top-0 bottom-0 left-0 flex   justify-center  overflow-hidden bg-popover"
       variants={menuAnimation}
       animate={open ? "open" : "closed"}
       initial="rest"

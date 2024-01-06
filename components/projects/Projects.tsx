@@ -31,7 +31,7 @@ function Projects({ data }: any) {
 
   return (
     <AnimatePresence>
-      <div className="flex h-full flex-col justify-between">
+      <div className="flex h-full flex-col md:gap-6">
         {index ? (
           <ProjectIndex
             data={data}
@@ -70,7 +70,7 @@ function Projects({ data }: any) {
             })}
             onClick={() => setIndex(false)}
           >
-            galirie
+            gallery
           </Button>
         </div>
         <div

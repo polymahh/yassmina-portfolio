@@ -20,7 +20,7 @@ function ProjectList({
     setShowPage(true)
   }
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 grow">
       {data?.map((card: projectType, idx: number) => {
         return (
           <ProjectCard
@@ -31,6 +31,7 @@ function ProjectList({
           />
         )
       })}
+      <div className="h-[800px] bg-red-500 w-2"></div>
     </div>
   )
 }

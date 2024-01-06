@@ -59,7 +59,7 @@ const centerImage = {
 function Loading({ setLoading }: any) {
   return (
     <motion.div
-      className="flex relative justify-center bg-white items-center h-full w-full p-8  overflow-hidden "
+      className="flex relative justify-center bg-white items-center h-full w-full p-8 md:max-h-[900px] overflow-hidden "
       initial="hidden"
       animate="show"
       exit="exit"

@@ -22,11 +22,9 @@ interface MainNavProps {
 const headerAnimation = {
   rest: {
     opacity: 0,
-    y: 200,
   },
   motion: {
     opacity: 1,
-    y: 0,
     trasition: {
       delay: 4,
       duration: 2,
