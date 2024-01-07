@@ -31,7 +31,6 @@ function ProjectList({
           />
         )
       })}
-      <div className="h-[800px] bg-red-500 w-2"></div>
     </div>
   )
 }

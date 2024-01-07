@@ -47,7 +47,7 @@ async function page() {
   const resume = response?.[0]
 
   return (
-    <section className="pt:8 container flex max-w-[1116px] flex-wrap-reverse justify-between  gap-6 pb-8 md:flex-nowrap md:pt-20 ">
+    <section className="pt:8 container flex max-w-[1116px] h-full flex-wrap-reverse justify-between  gap-6 pb-8 md:flex-nowrap md:pt-20 ">
       <div className="flex  flex-col items-start justify-center ">
         <h1 className="font-lamore text-4xl uppercase">
           Hi, I&apos;m YASMINA
@@ -67,8 +67,20 @@ async function page() {
           <span className="pl-2 font-light">Download my resume</span>
         </Link>
       </div>
-      <div>
-        <Image src={resume?.image} alt="picture" width={434} height={655} />
+      <div className="flex justify-end ">
+        <Image
+          src={resume?.image}
+          alt="picture"
+          objectFit="contain"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{
+            width: "auto",
+            height: "100%",
+            objectFit: "contain",
+          }}
+        />
       </div>
     </section>
   )

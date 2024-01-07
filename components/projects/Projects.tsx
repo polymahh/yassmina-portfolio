@@ -11,6 +11,7 @@ import Loading from "../Loading"
 import { Button, buttonVariants } from "../ui/button"
 import ProjectIndex from "./ProjectIndex"
 import ProjectPage from "./ProjectPage"
+import ProjectSlide from "./ProjectSlide"
 import ProjectsCarousel from "./ProjectsCarousel"
 import { projectType } from "./type"
 
@@ -79,7 +80,7 @@ function Projects({ data }: any) {
             !!showpage ? "flex" : "hidden"
           )}
         >
-          <ProjectPage
+          <ProjectSlide
             page={data[page]}
             nextPage={data[page + 1]}
             index={page}
