@@ -1,7 +1,6 @@
-import { config } from "process"
 import React from "react"
 import Link from "next/link"
-import { animate, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { Instagram, Linkedin, Twitter } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
@@ -27,6 +26,25 @@ const menuAnimation = {
   }),
 }
 
+const textMotion = {
+  rest: {
+    y: 0,
+    transition: {
+      duration: 0.2,
+      type: "tween",
+      ease: "easeOut",
+    },
+  },
+  hover: {
+    y: -65,
+    transition: {
+      duration: 0.2,
+      type: "tween",
+      ease: "easeOut",
+    },
+  },
+}
+
 function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
   return (
     <motion.div
@@ -43,10 +61,15 @@ function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
             <Link
               href="https://www.linkedin.com/in/yasmina-el-alaoui-48927a163/"
               target="_blank"
+              className="hover:text-accent-foreground"
             >
               <Linkedin />
             </Link>
-            <Link href="https://www.instagram.com/yas.dwg" target="_blank">
+            <Link
+              href="https://www.instagram.com/yas.dwg"
+              target="_blank"
+              className="hover:text-accent-foreground"
+            >
               <Instagram />
             </Link>
           </div>
@@ -61,7 +84,27 @@ function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
                   className="capitalize"
                   onClick={() => setOpen(false)}
                 >
-                  {item.title}
+                  {/* {item.title} */}
+                  <motion.div
+                    className="flex flex-col overflow-hidden h-[65px]"
+                    initial="rest"
+                    whileHover="hover"
+                    animate="rest"
+                  >
+                    <motion.span
+                      variants={textMotion}
+                      transition={{ staggerChildren: 0.5 }}
+                    >
+                      {item.title}
+                    </motion.span>
+                    <motion.span
+                      className="text-accent-foreground"
+                      variants={textMotion}
+                      transition={{ staggerChildren: 0.5 }}
+                    >
+                      {item.title}
+                    </motion.span>
+                  </motion.div>
                 </Link>
               )
           )}
