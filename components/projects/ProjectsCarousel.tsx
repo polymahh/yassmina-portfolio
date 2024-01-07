@@ -1,6 +1,6 @@
 import React from "react"
 import { EffectCoverflow, Pagination } from "swiper/modules"
-import { Swiper, SwiperSlide, useSwiperSlide } from "swiper/react"
+import { Swiper, SwiperSlide } from "swiper/react"
 
 import "swiper/css"
 import "swiper/css/effect-coverflow"

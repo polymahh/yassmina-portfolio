@@ -1,7 +1,15 @@
-import React from "react"
+"use client"
+
+import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import { MoveLeft, X } from "lucide-react"
-import { Swiper, SwiperSlide, useSwiperSlide } from "swiper/react"
+import {
+  Swiper,
+  SwiperClass,
+  SwiperSlide,
+  useSwiper,
+  useSwiperSlide,
+} from "swiper/react"
 
 import { Button, buttonVariants } from "../ui/button"
 import { projectType } from "./type"
@@ -23,6 +31,8 @@ function ProjectSlide({
   setPage: any
   setShowPage: any
 }) {
+  const [mainSwiper, setMainSwiper] = useState<SwiperClass>()
+
   return (
     <div className="fixed top-0 left-0 z-40  h-screen w-screen items-start justify-center overflow-hidden bg-white">
       <div className="absolute flex w-full justify-between p-9">
@@ -59,8 +69,9 @@ function ProjectSlide({
         grabCursor={true}
         slidesPerView={"auto"}
         spaceBetween={0}
-        mousewheel={true}
+        mousewheel={{ releaseOnEdges: true, sensitivity: 0.1 }}
         modules={[Mousewheel]}
+        onSwiper={setMainSwiper}
         className="mySwiper w-screen grow "
       >
         <SwiperSlide key={page?.title} className="relative max-w-[900px] ">
@@ -106,18 +117,47 @@ function ProjectSlide({
             </SwiperSlide>
           )
         })}
+        <SwiperSlide className="max-w-[900px]" style={{ height: "auto" }}>
+          <div className=" w-full flex max-w-[600px] h-full  flex-col justify-between gap-4 p-4 pl-24">
+            <div>
+              <h2 className="text-left font-lamore text-4xl cursor-pointer font-normal uppercase pb-4  ">
+                {page?.title}
+              </h2>
+              <p className=" text-sm leading-loose text-secondary-foreground">
+                {nextPage?.description}
+              </p>
+            </div>
+            <div className="flex flex-col w-3/4">
+              <div className="py-2 text-sm flex justify-between border-t border-black">
+                <span className="uppercase">Role</span>
+                <span>{page.role}</span>
+              </div>
+              <div className="py-2 flex justify-between text-sm border-t border-black">
+                <span className="uppercase">DATE</span>
+                <span>{page.date}</span>
+              </div>
+              <div className="py-2 flex justify-between text-sm border-t border-black">
+                <span className="uppercase">Location</span>
+                <span>{page.location}</span>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
         <SwiperSlide
           key={nextPage?.title}
           className="max-w-[900px]"
           style={{ height: "auto" }}
         >
-          <div className=" w-full flex max-w-[900px] h-full  flex-col items-center justify-center gap-4 ">
+          <div className=" w-full flex max-w-[900px] h-full  flex-col  justify-center gap-4 items-center ">
             <span className=" text-2xl text-secondary-foreground mb-8">
               Next Project:
             </span>
             <h2
               className="text-center font-lamore text-4xl cursor-pointer font-normal uppercase  md:text-[54px]  "
-              onClick={() => setPage(index + 1)}
+              onClick={() => {
+                setPage(index + 1)
+                mainSwiper?.slideTo(0)
+              }}
             >
               {nextPage?.title}
             </h2>
