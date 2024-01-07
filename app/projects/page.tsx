@@ -45,6 +45,7 @@ async function getProjects() {
         location: project?.properties?.location?.rich_text[0]?.plain_text,
         description: project?.properties?.description?.rich_text[0]?.plain_text,
         role: project?.properties?.role?.rich_text[0]?.plain_text,
+        status: project?.properties?.status?.rich_text[0]?.plain_text,
         date: project?.properties?.date?.date.start,
         preview: project?.properties?.preview?.files[0]?.file?.url,
         slides: slides,

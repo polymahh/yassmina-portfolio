@@ -40,7 +40,7 @@ function ProjectSlide({
           className={buttonVariants({
             variant: "link",
             size: "icon",
-            className: " p-0 z-20",
+            className: " p-0 z-20 hover:bg-white",
           })}
           onClick={() => setShowPage(false)}
         >
@@ -57,7 +57,7 @@ function ProjectSlide({
           className={buttonVariants({
             variant: "link",
             size: "icon",
-            className: " p-0 z-20 hidden md:block",
+            className: " p-0 z-20 hidden md:flex hover:bg-white",
           })}
           onClick={() => setShowPage(false)}
         >
@@ -127,18 +127,22 @@ function ProjectSlide({
                 {nextPage?.description}
               </p>
             </div>
-            <div className="flex flex-col w-3/4">
-              <div className="py-2 text-sm flex justify-between border-t border-black">
+            <div className="flex flex-col ">
+              <div className="py-2 flex justify-between text-xs sm:text-sm border-t border-black">
+                <span className="uppercase">Location</span>
+                <span>{page.location}</span>
+              </div>
+              <div className="py-2 flex justify-between text-xs sm:text-sm border-t border-black">
+                <span className="uppercase">YEAR</span>
+                <span>{page.date.split("-")[0]}</span>
+              </div>
+              <div className="py-2 text-xs sm:text-sm flex justify-between border-t border-black">
                 <span className="uppercase">Role</span>
                 <span>{page.role}</span>
               </div>
-              <div className="py-2 flex justify-between text-sm border-t border-black">
-                <span className="uppercase">DATE</span>
-                <span>{page.date}</span>
-              </div>
-              <div className="py-2 flex justify-between text-sm border-t border-black">
-                <span className="uppercase">Location</span>
-                <span>{page.location}</span>
+              <div className="py-2 text-xs sm:text-sm  flex justify-between border-t border-black">
+                <span className="uppercase">Status</span>
+                <span>{page.status}</span>
               </div>
             </div>
           </div>

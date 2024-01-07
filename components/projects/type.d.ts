@@ -4,6 +4,7 @@ export interface projectType{
     role:string,
     date:string,
     location: string,
-    preview:string
+    preview:string,
+    status:string,
     slides:any[]
 }
