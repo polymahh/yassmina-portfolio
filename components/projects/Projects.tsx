@@ -79,8 +79,8 @@ function Projects({ data }: any) {
           )}
         >
           <ProjectSlide
-            page={data[page]}
-            nextPage={data[page + 1]}
+            page={data?.[page]}
+            nextPage={data?.[page + 1]}
             index={page}
             setPage={setPage}
             setShowPage={setShowPage}
