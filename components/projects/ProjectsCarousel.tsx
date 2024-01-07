@@ -61,7 +61,7 @@ function ProjectsCarousel({
                   onClick={() => handleClick(idx)}
                 >
                   <Image
-                    src={idx === 0 ? "/images/center.jpg" : card.preview}
+                    src={card.preview}
                     alt="project preview"
                     width={0}
                     height={0}

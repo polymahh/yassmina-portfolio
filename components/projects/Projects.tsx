@@ -92,7 +92,7 @@ function Projects({ data }: any) {
           className="absolute top-0 z-20 overflow-hidden w-full h-full hidden md:block"
           key={"loader"}
         >
-          <Loading setLoading={setLoading} />
+          <Loading setLoading={setLoading} centerImageSrc={data[0].preview} />
         </motion.div>
       )}
     </AnimatePresence>

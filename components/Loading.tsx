@@ -56,7 +56,13 @@ const centerImage = {
   },
 }
 
-function Loading({ setLoading }: any) {
+function Loading({
+  setLoading,
+  centerImageSrc,
+}: {
+  setLoading: any
+  centerImageSrc: string
+}) {
   return (
     <motion.div
       className="flex relative justify-center bg-white items-center h-full w-full p-8 md:max-h-[900px] overflow-hidden "
@@ -75,7 +81,7 @@ function Loading({ setLoading }: any) {
         custom={0}
       >
         <Image
-          src="/images/center.jpg"
+          src={centerImageSrc}
           alt="img"
           // fill={true}
           width={800}
