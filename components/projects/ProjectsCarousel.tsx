@@ -20,6 +20,7 @@ function ProjectsCarousel({
   setPage: any
   setShowPage: any
 }) {
+  const isMobile = window.innerWidth < 768
   const handleClick = (idx: number) => {
     console.log(idx)
     setPage(idx)
@@ -56,7 +57,7 @@ function ProjectsCarousel({
             <SwiperSlide key={card.title} style={{ width: "80%" }}>
               <div className="flex md:grid  flex-col items-center h-full ">
                 <motion.div
-                  layoutId={idx === 0 ? "center-image" : ""}
+                  layoutId={idx === 0 || !isMobile ? "center-image" : ""}
                   className="flex justify-center overflow-hidden cursor-pointer h-full md:h-auto md:w-full"
                   onClick={() => handleClick(idx)}
                 >

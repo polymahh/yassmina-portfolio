@@ -19,39 +19,24 @@ interface MainNavProps {
   items?: NavItem[]
 }
 
-const headerAnimation = {
-  rest: {
-    opacity: 0,
-  },
-  motion: {
-    opacity: 1,
-    trasition: {
-      delay: 4,
-      duration: 2,
-      ease: cubicBezier(2.6, 0.01, -0.05, 0.95),
-    },
-  },
-}
-
 export function MainNav({ items }: MainNavProps) {
   const [open, setOpen] = React.useState(false)
   const path = usePathname()
-
+  const isMobile = window.innerWidth < 768
   const openMenu = () => {
     setOpen((prev) => !prev)
   }
   return (
     <motion.div
       className="flex w-full justify-between gap-6 md:gap-10"
-      // variants={headerAnimation}
       initial={{
         opacity: 0,
         y: 50,
       }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 3, duration: 0.5, ease: "linear" }}
+      transition={{ delay: isMobile ? 0 : 3, duration: 0.5, ease: "linear" }}
     >
-      <Link href="/" className="z-40 flex items-center space-x-2">
+      <Link href="/" className="z-40 flex items-center space-x-2 md:h-2">
         <Image src="/logo_black.png" alt="logo" height={36} width={146} />
       </Link>
 
