@@ -22,7 +22,11 @@ interface MainNavProps {
 export function MainNav({ items }: MainNavProps) {
   const [open, setOpen] = React.useState(false)
   const path = usePathname()
-  const isMobile = window.innerWidth < 768
+
+  let isMobile: boolean = true
+  if (typeof window !== "undefined") {
+    isMobile = window.innerWidth < 768
+  }
   const openMenu = () => {
     setOpen((prev) => !prev)
   }
