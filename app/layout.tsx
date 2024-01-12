@@ -1,11 +1,16 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
 import localFont from "next/font/local"
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
+import { getProjects } from "@/lib/requests"
 import { cn } from "@/lib/utils"
-import { Toaster } from "@/components/ui/toaster"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -52,7 +57,13 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ["projects"],
+    queryFn: () => getProjects(),
+  })
   return (
     <>
       <html lang="en" suppressHydrationWarning>
@@ -68,7 +79,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProvider attribute="class" defaultTheme="light">
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
-              <div className=" h-[calc(100vh-112px)] ">{children}</div>
+
+              <HydrationBoundary state={dehydrate(queryClient)}>
+                <div className=" h-[calc(100vh-112px)] ">{children}</div>
+              </HydrationBoundary>
             </div>
             {/* <TailwindIndicator /> */}
           </ThemeProvider>

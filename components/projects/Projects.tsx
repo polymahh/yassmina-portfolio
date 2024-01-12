@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
+import { useQuery } from "@tanstack/react-query"
 import { AnimatePresence, motion } from "framer-motion"
 
+import { getProjects } from "@/lib/requests"
 import { cn } from "@/lib/utils"
 
 import Loading from "../Loading"
@@ -13,7 +15,7 @@ import ProjectIndex from "./ProjectIndex"
 import ProjectSlide from "./ProjectSlide"
 import ProjectsCarousel from "./ProjectsCarousel"
 
-function Projects({ data }: any) {
+function Projects() {
   const [index, setIndex] = useState(false)
   const [showpage, setShowPage] = useState(false)
   const [page, setPage] = useState(0)
@@ -28,22 +30,24 @@ function Projects({ data }: any) {
     }
   }, [])
 
+  const { data } = useQuery({
+    queryKey: ["projects"],
+    queryFn: () => getProjects(),
+  })
+  console.log("🚀 ~ Projects ~ data:", data)
+
   return (
     <AnimatePresence>
       <div className="flex h-full flex-col md:gap-6">
         {index ? (
           <ProjectIndex
-            data={data}
+            data={data?.structuredData}
             setPage={setPage}
             setShowPage={setShowPage}
           />
         ) : (
           <>
-            <ProjectsCarousel
-              data={data}
-              setPage={setPage}
-              setShowPage={setShowPage}
-            />
+            <ProjectsCarousel data={data?.structuredData} />
           </>
         )}
         <div className="flex gap-4 mt-4 pl-4">
@@ -78,13 +82,13 @@ function Projects({ data }: any) {
             !!showpage ? "flex" : "hidden"
           )}
         >
-          <ProjectSlide
+          {/* <ProjectSlide
             page={data?.[page]}
             nextPage={data?.[page + 1]}
             index={page}
             setPage={setPage}
             setShowPage={setShowPage}
-          />
+          /> */}
         </div>
       </div>
       {loading && (
@@ -92,7 +96,10 @@ function Projects({ data }: any) {
           className="absolute top-0 z-20 overflow-hidden w-full h-full hidden md:block"
           key={"loader"}
         >
-          <Loading setLoading={setLoading} centerImageSrc={data[0].preview} />
+          <Loading
+            setLoading={setLoading}
+            centerImageSrc={data?.structuredData[0].preview}
+          />
         </motion.div>
       )}
     </AnimatePresence>

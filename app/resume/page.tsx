@@ -3,9 +3,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { NextResponse } from "next/server"
 import { Client } from "@notionhq/client"
+import { QueryClient } from "@tanstack/react-query"
 import { Download } from "lucide-react"
 
+import { getProjects } from "@/lib/requests"
 import { Button, buttonVariants } from "@/components/ui/button"
+import { projectType } from "@/components/projects/type"
 
 const notionSecret = process.env.NOTION_SECRET
 const projectsDB = process.env.NOTION_DB_RESUME as string
@@ -17,35 +20,20 @@ interface resumeType {
   cv: String
   image: String
 }
-async function getResume() {
-  if (!notionSecret || !projectsDB) {
-    return
-  }
-  try {
-    const query = await notion.databases.query({
-      database_id: projectsDB,
-    })
 
-    const structuredData = query.results.map((project: any) => {
-      return {
-        title: project?.properties?.title?.title[0]?.plain_text,
-        cv: project?.properties?.cv?.files[0]?.file?.url,
-        description: project?.properties?.description?.rich_text[0]?.plain_text,
-        image: project?.properties?.image?.files[0]?.file?.url,
-      }
-    })
-
-    return structuredData
-  } catch (error) {
-    console.log(error)
-  }
+interface dataType {
+  resume: resumeType
+  structuredData: projectType
 }
 
 // export const dynamic = "force-static"
 async function page() {
-  const response = await getResume()
-  const resume = response?.[0]
-
+  const queryClient = new QueryClient()
+  const data = await queryClient.ensureQueryData({
+    queryKey: ["projects"],
+    queryFn: () => getProjects(),
+  })
+  const resume = data?.resume
   return (
     <section className="pt:8 container flex max-w-[1116px] h-full flex-wrap-reverse justify-between  gap-6 pb-8 md:flex-nowrap md:pt-20 overflow-auto">
       <div className="flex  flex-col items-start justify-center ">
@@ -60,7 +48,7 @@ async function page() {
           className={buttonVariants({
             variant: "square",
           })}
-          href={resume?.cv}
+          href={resume?.cv as string}
           download
         >
           <Download />{" "}
@@ -69,7 +57,7 @@ async function page() {
       </div>
       <div className="flex justify-end ">
         <Image
-          src={resume?.image}
+          src={resume?.image as string}
           alt="picture"
           objectFit="contain"
           width={0}

@@ -16,22 +16,33 @@ import { projectType } from "./type"
 import "swiper/css"
 import "swiper/css/effect-coverflow"
 import "swiper/css/pagination"
+import { useParams, usePathname, useRouter } from "next/navigation"
+import { useQuery } from "@tanstack/react-query"
 import { Mousewheel } from "swiper/modules"
 
-function ProjectSlide({
-  page,
-  nextPage,
-  index,
-  setPage,
-  setShowPage,
-}: {
-  page: projectType
-  nextPage: projectType
-  index: number
-  setPage: any
-  setShowPage: any
-}) {
+import { getProjects } from "@/lib/requests"
+
+function ProjectSlide() {
   const [mainSwiper, setMainSwiper] = useState<SwiperClass>()
+
+  const router = useRouter()
+  const pathname = usePathname()
+  const projectName = pathname.split("/")[2].replaceAll("_", " ")
+  console.log("🚀 ~ ProjectSlide ~ pathname:", projectName)
+
+  const { data: fullData } = useQuery({
+    queryKey: ["projects"],
+    queryFn: () => getProjects(),
+  })
+
+  const data = fullData?.structuredData
+
+  const pageidx = data.findIndex(
+    (page: projectType) => page.title === projectName
+  )
+  const page = data?.[pageidx]
+  console.log("🚀 ~ ProjectSlide ~ page:", page)
+  const nextPage = pageidx + 1 < data.length ? data[pageidx + 1] : null
 
   return (
     <div className="fixed top-0 left-0 z-40  h-screen w-screen items-start justify-center overflow-hidden bg-white">
@@ -42,7 +53,7 @@ function ProjectSlide({
             size: "icon",
             className: " p-0 z-20 hover:bg-white",
           })}
-          onClick={() => setShowPage(false)}
+          onClick={() => router.push("/projects?loaded=true")}
         >
           <MoveLeft />
         </Button>
@@ -59,7 +70,7 @@ function ProjectSlide({
             size: "icon",
             className: " p-0 z-20 hidden md:flex hover:bg-white",
           })}
-          onClick={() => setShowPage(false)}
+          onClick={() => router.push("/projects?loaded=true")}
         >
           <X />
         </Button>
@@ -84,13 +95,13 @@ function ProjectSlide({
             </h2>
           </div>
         </SwiperSlide>
-        {page?.slides.map((card: any, idx: number) => {
-          return card.type === "file" ? (
-            <SwiperSlide key={idx} className="h-svh ">
+        {page?.slides.map((url: string, idx: number) => {
+          return (
+            <SwiperSlide key={url} className="h-svh ">
               <div className="flex h-svh relative">
                 <Image
-                  src={card[card.type].url}
-                  alt={card.title}
+                  src={url}
+                  alt={`${page.title} image`}
                   width={0}
                   height={0}
                   sizes="100vw"
@@ -101,18 +112,6 @@ function ProjectSlide({
                   }}
                   priority={true}
                 />
-              </div>
-            </SwiperSlide>
-          ) : (
-            <SwiperSlide
-              key={page?.title}
-              className=" max-w-[900px]"
-              style={{ height: "auto" }}
-            >
-              <div className=" w-full max-w-[900px] flex h-full flex-col items-center justify-center ">
-                <p className="text-center font-sans leading-relaxed text-xl px-6  max-w-[600px]">
-                  {card[card.type].content}
-                </p>
               </div>
             </SwiperSlide>
           )
@@ -134,7 +133,7 @@ function ProjectSlide({
               </div>
               <div className="py-2 flex justify-between text-xs sm:text-sm border-t border-black">
                 <span className="uppercase">YEAR</span>
-                <span>{page.date.split("-")[0]}</span>
+                <span>{page.date}</span>
               </div>
               <div className="py-2 text-xs sm:text-sm flex justify-between border-t border-black">
                 <span className="uppercase">Role</span>
@@ -159,8 +158,7 @@ function ProjectSlide({
             <h2
               className="text-center font-lamore text-4xl cursor-pointer font-normal uppercase  md:text-[54px]  "
               onClick={() => {
-                setPage(index + 1)
-                mainSwiper?.slideTo(0)
+                router.push(`/projects/${nextPage?.title.replaceAll(" ", "_")}`)
               }}
             >
               {nextPage?.title}
