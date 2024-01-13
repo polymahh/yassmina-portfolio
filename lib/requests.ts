@@ -5,11 +5,11 @@ export async function getProjects() {
   try {
     const res = await fetch(
       `https://cdn.contentful.com/spaces/${spaceId}/entries?access_token=${accessToken}`,
-      {cache:"no-cache"}
+      { cache: 'no-cache' }
     )
     const response = await res.json()
 
-    const {fields} = response.items.find((item:any) =>  item?.sys?.contentType?.sys?.id == "resume")
+    const {fields} = response?.items?.find((item:any) =>  item?.sys?.contentType?.sys?.id == "resume")
     const resumeImgID = fields?.image?.sys.id
     const cvId = fields?.cv?.sys?.id
     const resume = {
