@@ -23,7 +23,7 @@ export async function getProjects() {
       .sort((a: any, b: any) => a.sys.createdAt.localeCompare(b.sys.createdAt))
       .map((project: any) => {
         const previewId = project?.fields?.preview.sys.id
-        const previewurl = response.includes.Asset.find(
+        const previewurl = response?.includes?.Asset.find(
           (asset: any) => asset.sys.id === previewId
         ).fields.file.url
         const slidesIDS = project?.fields?.carousel.map(
@@ -38,7 +38,7 @@ export async function getProjects() {
           status: project?.fields?.status,
           date: project?.fields?.year,
           preview: `https:${previewurl}`,
-          slides: response.includes.Asset.filter((asset: any) =>
+          slides: response?.includes.Asset.filter((asset: any) =>
             slidesIDS.includes(asset.sys.id)
           ).map((asset: any) => `https:${asset.fields.file.url}`),
         }

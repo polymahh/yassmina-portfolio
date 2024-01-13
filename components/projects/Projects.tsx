@@ -7,12 +7,10 @@ import { useQuery } from "@tanstack/react-query"
 import { AnimatePresence, motion } from "framer-motion"
 
 import { getProjects } from "@/lib/requests"
-import { cn } from "@/lib/utils"
 
 import Loading from "../Loading"
 import { Button, buttonVariants } from "../ui/button"
 import ProjectIndex from "./ProjectIndex"
-import ProjectSlide from "./ProjectSlide"
 import ProjectsCarousel from "./ProjectsCarousel"
 
 function Projects() {
