@@ -1,7 +1,13 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Hind_Madurai } from "next/font/google"
 import Image from "next/image"
 import { cubicBezier, motion } from "framer-motion"
+
+let isMobile: boolean = true
+console.log("🚀 ~ isMobile:", isMobile)
+if (typeof window !== "undefined") {
+  isMobile = window.innerWidth < 768
+}
 
 const container = {
   show: {
@@ -15,7 +21,7 @@ const container = {
     Y: 200,
     transition: {
       ease: "easeInOut",
-      deration: 0.8,
+      duration: 0.8,
     },
   },
 }
@@ -30,8 +36,8 @@ const item = {
     y: 0,
     transition: {
       ease: cubicBezier(0.6, 0.01, -0.05, 0.95),
-      duration: 1.6,
-      delay: 0.3 * idx,
+      duration: 0,
+      delay: isMobile ? 0 : 0.3 * idx,
     },
   }),
   exit: {
@@ -39,7 +45,7 @@ const item = {
     Y: 200,
     transition: {
       ease: "easeInOut",
-      deration: 0.8,
+      duration: 0.8,
     },
   },
 }
@@ -51,7 +57,7 @@ const centerImage = {
     y: 0,
     transition: {
       ease: cubicBezier(0.6, 0.01, -0.05, 0.95),
-      duration: 1.6,
+      duration: isMobile ? 0 : 1.6,
     },
   },
 }

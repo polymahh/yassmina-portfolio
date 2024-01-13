@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import { AnimatePresence, motion } from "framer-motion"
 
 import { getProjects } from "@/lib/requests"
+import { cn } from "@/lib/utils"
 
 import Loading from "../Loading"
 import { Button, buttonVariants } from "../ui/button"
@@ -41,7 +42,7 @@ function Projects() {
             <ProjectsCarousel data={data?.structuredData as projectType[]} />
           </>
         )}
-        <div className="flex gap-4 mt-4 pl-4">
+        <div className="mt-4 flex gap-4 pl-4">
           <Button
             className={buttonVariants({
               size: "link",
@@ -68,9 +69,12 @@ function Projects() {
           </Button>
         </div>
       </div>
-      {loading && (
+      {loading ? (
         <motion.div
-          className="absolute top-0 z-20 overflow-hidden w-full h-full hidden md:block"
+          className={cn(
+            " absolute top-0 z-20 h-full w-full overflow-hidden  ",
+            loaded === "true" ? "md:hidden" : " md:block"
+          )}
           key={"loader"}
         >
           <Loading
@@ -78,7 +82,7 @@ function Projects() {
             centerImageSrc={data?.structuredData?.[0].preview ?? ""}
           />
         </motion.div>
-      )}
+      ) : null}
     </AnimatePresence>
   )
 }
