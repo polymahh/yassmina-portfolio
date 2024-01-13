@@ -10,7 +10,6 @@ export async function getProjects() {
       { cache: 'no-cache' }
     )
     const response = await res.json()
-    console.log("🚀 ~ getProjects ~ response:", response)
 
     const rawResume = response?.items?.find((item:any) =>  item?.sys?.contentType?.sys?.id == "resume")
     const resumeImgID = rawResume?.fields?.image?.sys.id
@@ -45,7 +44,6 @@ export async function getProjects() {
           ).map((asset: any) => `https:${asset.fields.file.url}`),
         }
       })
-      console.log("🚀 ~ getProjects ~ structuredData:", structuredData)
     return {structuredData ,resume} as {structuredData:projectType[] ,resume:resumeType}
   } catch (error) {
     console.log(error)

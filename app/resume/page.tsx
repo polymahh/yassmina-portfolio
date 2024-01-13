@@ -8,8 +8,8 @@ import { getProjects } from "@/lib/requests"
 import { buttonVariants } from "@/components/ui/button"
 
 // export const dynamic = "force-static"
+const queryClient = new QueryClient()
 async function page() {
-  const queryClient = new QueryClient()
   const data = await queryClient.ensureQueryData({
     queryKey: ["projects"],
     queryFn: () => getProjects(),
