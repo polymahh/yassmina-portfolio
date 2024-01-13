@@ -2,7 +2,6 @@ const spaceId = process.env.CONTENTFUL_SPACE_ID as string
 const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN as string
 
 export async function getProjects() {
-  console.log("this running")
   try {
     const res = await fetch(
       `https://cdn.contentful.com/spaces/${spaceId}/entries?access_token=${accessToken}`,
@@ -10,14 +9,14 @@ export async function getProjects() {
     )
     const response = await res.json()
 
-    const {fields,include} = response.items.find((item:any) =>  item?.sys?.contentType?.sys?.id == "resume")
-    const resumeImgID = fields?.cv?.sys.id
+    const {fields} = response.items.find((item:any) =>  item?.sys?.contentType?.sys?.id == "resume")
+    const resumeImgID = fields?.image?.sys.id
     const cvId = fields?.cv?.sys?.id
     const resume = {
       title: fields?.name,
-        cv: `https:${include?.Asset?.find((asset:any) => asset.sys.id === cvId).fields.file.url}`,
+        cv: `https:${response.includes?.Asset?.find((asset:any) => asset.sys.id === cvId).fields.file.url}`,
         description: fields?.description?.content[0]?.content?.[0]?.value,
-        image: `https:${include?.Asset?.find((asset:any) => asset.sys.id === resumeImgID).fields.file.url}`,
+        image: `https:${response.includes?.Asset?.find((asset:any) => asset?.sys?.id === resumeImgID).fields.file.url}`,
     }
     const structuredData = response.items
       .filter((item:any) => item?.sys?.contentType?.sys?.id === "projects"   )

@@ -1,30 +1,11 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { NextResponse } from "next/server"
-import { Client } from "@notionhq/client"
 import { QueryClient } from "@tanstack/react-query"
 import { Download } from "lucide-react"
 
 import { getProjects } from "@/lib/requests"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { projectType } from "@/components/projects/type"
-
-const notionSecret = process.env.NOTION_SECRET
-const projectsDB = process.env.NOTION_DB_RESUME as string
-
-const notion = new Client({ auth: notionSecret })
-interface resumeType {
-  title: String
-  description: String
-  cv: String
-  image: String
-}
-
-interface dataType {
-  resume: resumeType
-  structuredData: projectType
-}
+import { buttonVariants } from "@/components/ui/button"
 
 // export const dynamic = "force-static"
 async function page() {

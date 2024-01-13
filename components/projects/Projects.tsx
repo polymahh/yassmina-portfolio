@@ -17,8 +17,6 @@ import ProjectsCarousel from "./ProjectsCarousel"
 
 function Projects() {
   const [index, setIndex] = useState(false)
-  const [showpage, setShowPage] = useState(false)
-  const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(true)
 
   const params = useSearchParams()
@@ -34,17 +32,12 @@ function Projects() {
     queryKey: ["projects"],
     queryFn: () => getProjects(),
   })
-  console.log("🚀 ~ Projects ~ data:", data)
 
   return (
     <AnimatePresence>
       <div className="flex h-full flex-col md:gap-6">
         {index ? (
-          <ProjectIndex
-            data={data?.structuredData}
-            setPage={setPage}
-            setShowPage={setShowPage}
-          />
+          <ProjectIndex data={data?.structuredData} />
         ) : (
           <>
             <ProjectsCarousel data={data?.structuredData} />
@@ -75,20 +68,6 @@ function Projects() {
           >
             gallery
           </Button>
-        </div>
-        <div
-          className={cn(
-            "absolute left-0 top-0",
-            !!showpage ? "flex" : "hidden"
-          )}
-        >
-          {/* <ProjectSlide
-            page={data?.[page]}
-            nextPage={data?.[page + 1]}
-            index={page}
-            setPage={setPage}
-            setShowPage={setShowPage}
-          /> */}
         </div>
       </div>
       {loading && (

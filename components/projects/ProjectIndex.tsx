@@ -1,23 +1,14 @@
 import React from "react"
+import { useRouter } from "next/navigation"
 
 import ProjectCard from "./ProjectCard"
 import { projectType } from "./type"
 
-function ProjectList({
-  data,
-  setPage,
-  setShowPage,
-}: {
-  data: projectType[]
-  setPage: any
-  setShowPage: any
-}) {
-  console.log(data)
+function ProjectList({ data }: { data: projectType[] }) {
+  const router = useRouter()
 
-  const handleClick = (idx: number) => {
-    console.log(idx)
-    setPage(idx)
-    setShowPage(true)
+  const handleClick = (title: string) => {
+    router.push(`/projects/${title.replaceAll(" ", "_")}`)
   }
   return (
     <div className="flex flex-col gap-4 grow">

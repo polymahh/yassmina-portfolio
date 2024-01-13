@@ -8,3 +8,11 @@ export interface projectType{
     status:string,
     slides:any[]
 }
+
+export interface resumeType {
+    title: String
+    description: String
+    cv: String
+    image: String
+  }
+  
