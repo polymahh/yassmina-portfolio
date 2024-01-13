@@ -1,3 +1,4 @@
+'use server'
 import { projectType, resumeType } from "@/components/projects/type"
 
 const spaceId = process.env.CONTENTFUL_SPACE_ID as string
