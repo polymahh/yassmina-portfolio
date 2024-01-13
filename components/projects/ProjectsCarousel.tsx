@@ -6,28 +6,21 @@ import "swiper/css"
 import "swiper/css/effect-coverflow"
 import "swiper/css/pagination"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { useSwiper } from "swiper/react"
 
 import { projectType } from "./type"
 
-function ProjectsCarousel({
-  data,
-  setPage,
-  setShowPage,
-}: {
-  data: projectType[]
-  setPage: any
-  setShowPage: any
-}) {
+function ProjectsCarousel({ data }: { data: projectType[] }) {
+  const router = useRouter()
   let isMobile: boolean = false
   if (typeof window !== "undefined") {
     isMobile = window.innerWidth < 768
   }
-  const handleClick = (idx: number) => {
-    console.log(idx)
-    setPage(idx)
-    setShowPage(true)
+  const handleClick = (title: string) => {
+    console.log(title)
+    router.push(`/projects/${title.replaceAll(" ", "_")}`)
   }
 
   return (
@@ -55,14 +48,18 @@ function ProjectsCarousel({
         modules={[EffectCoverflow, Pagination]}
         className="mySwiper w-full md:w-[90%] grow md:max-h-[900px]  "
       >
-        {data.map((card: projectType, idx: number) => {
+        {data?.map((card: projectType, idx: number) => {
           return (
-            <SwiperSlide key={card.title} style={{ width: "80%" }}>
+            <SwiperSlide
+              key={card.title.replaceAll(" ", "_")}
+              id={card.title.replaceAll(" ", "_")}
+              style={{ width: "80%" }}
+            >
               <div className="flex md:grid  flex-col items-center h-full ">
                 <motion.div
                   layoutId={idx === 0 && !isMobile ? "center-image" : ""}
                   className="flex justify-center overflow-hidden cursor-pointer h-full md:h-auto md:w-full"
-                  onClick={() => handleClick(idx)}
+                  onClick={() => handleClick(card.title)}
                 >
                   <Image
                     src={card.preview}
@@ -80,7 +77,7 @@ function ProjectsCarousel({
                 </motion.div>
                 <div className="flex flex-col items-center border border-white  bg-white">
                   <h2
-                    onClick={() => handleClick(idx)}
+                    onClick={() => handleClick(card.title)}
                     className="mt-4 md:mt-8 cursor-pointer text-center font-lamore text-4xl font-normal uppercase leading-tight tracking-tighter md:text-[54px]"
                   >
                     {card.title}
