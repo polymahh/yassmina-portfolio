@@ -10,9 +10,9 @@ export interface projectType{
 }
 
 export interface resumeType {
-    title: String
-    description: String
-    cv: String
-    image: String
+    title: string
+    description: string
+    cv: string
+    image: string
   }
   

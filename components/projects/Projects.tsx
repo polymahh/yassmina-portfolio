@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { AnimatePresence, motion } from "framer-motion"
@@ -12,6 +11,7 @@ import Loading from "../Loading"
 import { Button, buttonVariants } from "../ui/button"
 import ProjectIndex from "./ProjectIndex"
 import ProjectsCarousel from "./ProjectsCarousel"
+import { projectType } from "./type"
 
 function Projects() {
   const [index, setIndex] = useState(false)
@@ -35,10 +35,10 @@ function Projects() {
     <AnimatePresence>
       <div className="flex h-full flex-col md:gap-6">
         {index ? (
-          <ProjectIndex data={data?.structuredData} />
+          <ProjectIndex data={data?.structuredData as projectType[]} />
         ) : (
           <>
-            <ProjectsCarousel data={data?.structuredData} />
+            <ProjectsCarousel data={data?.structuredData as projectType[]} />
           </>
         )}
         <div className="flex gap-4 mt-4 pl-4">
@@ -75,7 +75,7 @@ function Projects() {
         >
           <Loading
             setLoading={setLoading}
-            centerImageSrc={data?.structuredData[0].preview}
+            centerImageSrc={data?.structuredData?.[0].preview ?? ""}
           />
         </motion.div>
       )}

@@ -1,3 +1,5 @@
+import { projectType, resumeType } from "@/components/projects/type"
+
 const spaceId = process.env.CONTENTFUL_SPACE_ID as string
 const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN as string
 
@@ -8,18 +10,18 @@ export async function getProjects() {
       { cache: 'no-cache' }
     )
     const response = await res.json()
+    console.log("🚀 ~ getProjects ~ response:", response)
 
-    const {fields} = response?.items?.find((item:any) =>  item?.sys?.contentType?.sys?.id == "resume")
-    const resumeImgID = fields?.image?.sys.id
-    const cvId = fields?.cv?.sys?.id
+    const rawResume = response?.items?.find((item:any) =>  item?.sys?.contentType?.sys?.id == "resume")
+    const resumeImgID = rawResume?.fields?.image?.sys.id
+    const cvId = rawResume?.fields?.cv?.sys?.id
     const resume = {
-      title: fields?.name,
-        cv: `https:${response.includes?.Asset?.find((asset:any) => asset.sys.id === cvId).fields.file.url}`,
-        description: fields?.description?.content[0]?.content?.[0]?.value,
-        image: `https:${response.includes?.Asset?.find((asset:any) => asset?.sys?.id === resumeImgID).fields.file.url}`,
+        title: rawResume?.fields?.name,
+        cv: `https:${response?.includes?.Asset?.find((asset:any) => asset.sys.id === cvId).fields.file.url}`,
+        description: rawResume?.fields?.description?.content[0]?.content?.[0]?.value,
+        image: `https:${response?.includes?.Asset?.find((asset:any) => asset?.sys?.id === resumeImgID).fields.file.url}`,
     }
-    const structuredData = response.items
-      .filter((item:any) => item?.sys?.contentType?.sys?.id === "projects"   )
+    const structuredData = await response?.items?.filter((item:any) => item?.sys?.contentType?.sys?.id === "projects"   )
       .sort((a: any, b: any) => a.sys.createdAt.localeCompare(b.sys.createdAt))
       .map((project: any) => {
         const previewId = project?.fields?.preview.sys.id
@@ -38,12 +40,13 @@ export async function getProjects() {
           status: project?.fields?.status,
           date: project?.fields?.year,
           preview: `https:${previewurl}`,
-          slides: response?.includes.Asset.filter((asset: any) =>
+          slides: response?.includes?.Asset?.filter((asset: any) =>
             slidesIDS.includes(asset.sys.id)
           ).map((asset: any) => `https:${asset.fields.file.url}`),
         }
       })
-    return {structuredData,resume}
+      console.log("🚀 ~ getProjects ~ structuredData:", structuredData)
+    return {structuredData ,resume} as {structuredData:projectType[] ,resume:resumeType}
   } catch (error) {
     console.log(error)
   }

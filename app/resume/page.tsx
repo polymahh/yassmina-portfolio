@@ -29,7 +29,7 @@ async function page() {
           className={buttonVariants({
             variant: "square",
           })}
-          href={resume?.cv as string}
+          href={resume?.cv ?? ""}
           download
         >
           <Download />{" "}
@@ -38,7 +38,7 @@ async function page() {
       </div>
       <div className="flex justify-end ">
         <Image
-          src={resume?.image as string}
+          src={resume?.image ?? ""}
           alt="picture"
           objectFit="contain"
           width={0}
