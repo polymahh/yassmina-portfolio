@@ -32,6 +32,7 @@ export async function getProjects() {
           (img: any) => img.sys.id
         )
         return {
+          projectId :project?.fields?.projectId,
           title: project?.fields?.title,
           location: project?.fields?.location,
           description:

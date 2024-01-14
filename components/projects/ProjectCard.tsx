@@ -56,7 +56,7 @@ function ProjectCard({
     <>
       <motion.div
         className={`hidden w-full flex-col  items-center  justify-between hover:cursor-pointer md:flex md:flex-row `}
-        onClick={() => handleClick(card.title)}
+        onClick={() => handleClick(card.projectId)}
         variants={titleAnimation}
         initial="rest"
         whileHover="hover"
@@ -76,7 +76,7 @@ function ProjectCard({
       </motion.div>
       <div
         className="flex flex-col gap-6 cursor-pointer items-center md:hidden"
-        onClick={() => handleClick(card.title)}
+        onClick={() => handleClick(card.projectId)}
       >
         <h1 className="text-center font-lamore text-4xl font-normal uppercase leading-none">
           {card.title}

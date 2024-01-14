@@ -1,5 +1,6 @@
 export interface projectType{
     title:string,
+    projectId:string,
     description:string,
     role:string,
     date:string,

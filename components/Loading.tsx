@@ -4,7 +4,6 @@ import Image from "next/image"
 import { cubicBezier, motion } from "framer-motion"
 
 let isMobile: boolean = true
-console.log("🚀 ~ isMobile:", isMobile)
 if (typeof window !== "undefined") {
   isMobile = window.innerWidth < 768
 }

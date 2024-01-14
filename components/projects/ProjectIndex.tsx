@@ -7,8 +7,8 @@ import { projectType } from "./type"
 function ProjectList({ data }: { data: projectType[] }) {
   const router = useRouter()
 
-  const handleClick = (title: string) => {
-    router.push(`/projects/${title.replaceAll(" ", "_")}`)
+  const handleClick = (projectId: string) => {
+    router.push(`/projects/${projectId}`)
   }
   return (
     <div className="flex flex-col gap-4 grow">
