@@ -1,3 +1,4 @@
+'use server'
 import { projectType, resumeType } from "@/components/projects/type"
 
 const spaceId = process.env.CONTENTFUL_SPACE_ID as string
@@ -31,6 +32,7 @@ export async function getProjects() {
           (img: any) => img.sys.id
         )
         return {
+          projectId :project?.fields?.projectId,
           title: project?.fields?.title,
           location: project?.fields?.location,
           description:

@@ -18,9 +18,9 @@ function ProjectsCarousel({ data }: { data: projectType[] }) {
   if (typeof window !== "undefined") {
     isMobile = window.innerWidth < 768
   }
-  const handleClick = (title: string) => {
-    console.log(title)
-    router.push(`/projects/${title.replaceAll(" ", "_")}`)
+  const handleClick = (projectId: string) => {
+    console.log(projectId)
+    router.push(`/projects/${projectId}`)
   }
 
   return (
@@ -51,15 +51,15 @@ function ProjectsCarousel({ data }: { data: projectType[] }) {
         {data?.map((card: projectType, idx: number) => {
           return (
             <SwiperSlide
-              key={card.title.replaceAll(" ", "_")}
-              id={card.title.replaceAll(" ", "_")}
+              key={card.title}
+              id={card.title}
               style={{ width: "80%" }}
             >
               <div className="flex md:grid  flex-col items-center h-full ">
                 <motion.div
                   layoutId={idx === 0 && !isMobile ? "center-image" : ""}
                   className="flex justify-center overflow-hidden cursor-pointer h-full md:h-auto md:w-full"
-                  onClick={() => handleClick(card.title)}
+                  onClick={() => handleClick(card.projectId)}
                 >
                   <Image
                     src={card.preview}
@@ -77,7 +77,7 @@ function ProjectsCarousel({ data }: { data: projectType[] }) {
                 </motion.div>
                 <div className="flex flex-col items-center border border-white  bg-white">
                   <h2
-                    onClick={() => handleClick(card.title)}
+                    onClick={() => handleClick(card.projectId)}
                     className="mt-4 md:mt-8 cursor-pointer text-center font-lamore text-4xl font-normal uppercase leading-tight tracking-tighter md:text-[54px]"
                   >
                     {card.title}

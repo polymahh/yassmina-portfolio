@@ -27,8 +27,7 @@ function ProjectSlide() {
 
   const router = useRouter()
   const pathname = usePathname()
-  const projectName = pathname.split("/")[2].replaceAll("_", " ")
-  console.log("🚀 ~ ProjectSlide ~ pathname:", projectName)
+  const projectName = pathname.split("/")[2]
 
   const { data: fullData } = useQuery({
     queryKey: ["projects"],
@@ -38,9 +37,8 @@ function ProjectSlide() {
   const data = fullData?.structuredData
 
   const pageidx =
-    data?.findIndex((page: projectType) => page.title === projectName) ?? 0
+    data?.findIndex((page: projectType) => page.projectId === projectName) ?? 0
   const page = data?.[pageidx]
-  console.log("🚀 ~ ProjectSlide ~ page:", page)
   const nextPage =
     pageidx + 1 < (data?.length ?? 0) ? data?.[pageidx + 1] : null
 
@@ -123,7 +121,7 @@ function ProjectSlide() {
                 {page?.title}
               </h2>
               <p className=" text-sm leading-loose text-secondary-foreground">
-                {nextPage?.description}
+                {page?.description}
               </p>
             </div>
             <div className="flex flex-col ">
@@ -146,28 +144,30 @@ function ProjectSlide() {
             </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide
-          key={nextPage?.title}
-          className="max-w-[900px]"
-          style={{ height: "auto" }}
-        >
-          <div className=" w-full flex max-w-[900px] h-full  flex-col  justify-center gap-4 items-center ">
-            <span className=" text-2xl text-secondary-foreground mb-8">
-              Next Project:
-            </span>
-            <h2
-              className="text-center font-lamore text-4xl cursor-pointer font-normal uppercase  md:text-[54px]  "
-              onClick={() => {
-                router.push(`/projects/${nextPage?.title.replaceAll(" ", "_")}`)
-              }}
-            >
-              {nextPage?.title}
-            </h2>
-            <span className=" text-2xl text-accent-foreground">
-              {nextPage?.location}
-            </span>
-          </div>
-        </SwiperSlide>
+        {pageidx + 1 < (data?.length ?? 0) ? (
+          <SwiperSlide
+            key={nextPage?.title}
+            className="max-w-[900px]"
+            style={{ height: "auto" }}
+          >
+            <div className=" w-full flex max-w-[900px] h-full  flex-col  justify-center gap-4 items-center ">
+              <span className=" text-2xl text-secondary-foreground mb-8">
+                Next Project:
+              </span>
+              <h2
+                className="text-center font-lamore text-4xl cursor-pointer font-normal uppercase  md:text-[54px]  "
+                onClick={() => {
+                  router.push(`/projects/${nextPage?.projectId}`)
+                }}
+              >
+                {nextPage?.title}
+              </h2>
+              <span className=" text-2xl text-accent-foreground">
+                {nextPage?.location}
+              </span>
+            </div>
+          </SwiperSlide>
+        ) : null}
       </Swiper>
     </div>
   )
