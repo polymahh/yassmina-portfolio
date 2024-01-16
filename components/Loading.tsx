@@ -78,7 +78,7 @@ function Loading({
       onAnimationComplete={() => setLoading(false)}
       viewport={{ once: true }}
     >
-      <div className="flex relative justify-center h-full  w-full md:max-h-[900px]">
+      <div className="flex relative justify-center h-full m-auto  w-full md:max-w-[1200px] md:max-h-[900px]">
         {/* center image */}
         <motion.div
           className="z-40 self-center hidden md:block "

@@ -72,7 +72,7 @@ function Projects() {
       {loading ? (
         <motion.div
           className={cn(
-            " absolute top-0 z-20 h-full w-full overflow-hidden  ",
+            " fixed top-0 left-0 z-20 h-screen w-screen overflow-hidden  ",
             loaded === "true" ? "md:hidden" : " md:block"
           )}
           key={"loader"}
