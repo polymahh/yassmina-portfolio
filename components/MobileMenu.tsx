@@ -48,13 +48,13 @@ const textMotion = {
 function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
   return (
     <motion.div
-      className="fixed -right-0 top-0 bottom-0 left-0 flex   justify-center  overflow-hidden bg-popover"
+      className="fixed -right-0 top-0 bottom-0 left-0 flex justify-center  overflow-hidden bg-popover"
       variants={menuAnimation}
       animate={open ? "open" : "closed"}
       initial="rest"
     >
-      <div className=" container  flex  h-full w-full flex-col-reverse items-end p-12  md:flex-row md:justify-between">
-        <div className="flex flex-col gap-2  pb-6">
+      <div className=" container  flex  h-full w-full flex-col-reverse items-center justify-center md:items-end md:p-12  md:flex-row md:justify-between">
+        <div className="flex flex-col gap-2 self-start md:self-end pb-6">
           <span className="text-xl">(+212) 698 187 514</span>
           <span className="text-xl">elalaouiyasmina@gmail.com</span>
           <div className="flex gap-4 pt-8">
@@ -74,7 +74,7 @@ function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
             </Link>
           </div>
         </div>
-        <div className="mb-[108px] flex flex-col gap-8  text-6xl">
+        <div className="mb-[108px] flex flex-col gap-8 grow md:grow-0 justify-center text-6xl">
           {siteConfig.mainNav.map(
             (item, index) =>
               item.href && (

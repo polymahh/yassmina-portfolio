@@ -44,7 +44,7 @@ function ProjectSlide() {
 
   return (
     <div className="fixed top-0 left-0 z-40  h-screen w-screen items-start justify-center overflow-hidden bg-white">
-      <div className="absolute flex w-full justify-between p-3 md:p-9">
+      <div className="absolute flex w-full justify-between p-3 md:p-6">
         <Button
           className={buttonVariants({
             variant: "link",
@@ -117,10 +117,10 @@ function ProjectSlide() {
         <SwiperSlide className="max-w-[900px]" style={{ height: "auto" }}>
           <div className=" w-full flex max-w-[600px] h-full  flex-col justify-between gap-4 p-4 pl-8 md:pl-24">
             <div>
-              <h2 className="text-left font-lamore text-4xl cursor-pointer font-normal uppercase pb-4 pt-12 md:pt-4  ">
+              <h2 className="text-left font-lamore text-4xl xl:pt-16 cursor-pointer font-normal uppercase pb-4 pt-12 md:pt-4  ">
                 {page?.title}
               </h2>
-              <p className=" text-sm leading-loose text-secondary-foreground">
+              <p className=" text-xs leading-loose text-secondary-foreground">
                 {page?.description}
               </p>
             </div>

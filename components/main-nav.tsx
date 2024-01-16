@@ -40,7 +40,11 @@ export function MainNav({ items }: MainNavProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: isMobile ? 0 : 3, duration: 0.5, ease: "linear" }}
     >
-      <Link href="/" className="z-40 flex items-center space-x-2 md:h-2">
+      <Link
+        onClick={() => setOpen(false)}
+        href="/"
+        className="z-40 flex items-center space-x-2 md:h-2"
+      >
         <Image src="/logo_black.png" alt="logo" height={36} width={146} />
       </Link>
 

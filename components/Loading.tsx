@@ -35,7 +35,7 @@ const item = {
     y: 0,
     transition: {
       ease: cubicBezier(0.6, 0.01, -0.05, 0.95),
-      duration: isMobile ? 0 : 1.6,
+      duration: isMobile ? 0 : 1.2,
       delay: isMobile ? 0 : 0.3 * idx,
     },
   }),
@@ -44,7 +44,7 @@ const item = {
     Y: 200,
     transition: {
       ease: "easeInOut",
-      duration: 0.8,
+      duration: 0.6,
     },
   },
 }
@@ -70,7 +70,7 @@ function Loading({
 }) {
   return (
     <motion.div
-      className="flex relative justify-center bg-white items-center h-full w-full p-8 md:max-h-[900px] overflow-hidden "
+      className=" bg-white items-center h-screen w-full p-8  overflow-hidden "
       initial="hidden"
       animate="show"
       exit="exit"
@@ -78,66 +78,78 @@ function Loading({
       onAnimationComplete={() => setLoading(false)}
       viewport={{ once: true }}
     >
-      {/* center image */}
-      <motion.div
-        className="z-40 self-center hidden md:block "
-        layoutId="center-image"
-        variants={centerImage}
-        custom={0}
-      >
-        <Image
-          src={centerImageSrc}
-          alt="img"
-          // fill={true}
-          width={800}
-          height={400}
-        />
-      </motion.div>
-      <motion.div
-        className=" absolute top-0 left-0 hidden md:block"
-        variants={item}
-        custom={1}
-      >
-        <Image src="/images/top_left.webp" alt="img" width={300} height={200} />
-      </motion.div>
+      <div className="flex relative justify-center h-full  w-full md:max-h-[900px]">
+        {/* center image */}
+        <motion.div
+          className="z-40 self-center hidden md:block "
+          layoutId="center-image"
+          variants={centerImage}
+          custom={0}
+        >
+          <Image
+            priority={true}
+            src={centerImageSrc}
+            alt="img"
+            // fill={true}
+            width={800}
+            height={400}
+          />
+        </motion.div>
+        <motion.div
+          className=" absolute top-0 left-0 hidden md:block"
+          variants={item}
+          custom={1}
+        >
+          <Image
+            priority={true}
+            src="/images/top_left.webp"
+            alt="img"
+            width={300}
+            height={200}
+          />
+        </motion.div>
 
-      <motion.div
-        className=" absolute top-0 right-0 hidden md:block"
-        variants={item}
-        custom={2}
-      >
-        <Image
-          src="/images/top_right.webp"
-          alt="img"
-          width={300}
-          height={200}
-        />
-      </motion.div>
+        <motion.div
+          className=" absolute top-0 right-0 hidden md:block"
+          variants={item}
+          custom={2}
+        >
+          <Image
+            priority={true}
+            src="/images/top_right.webp"
+            alt="img"
+            width={300}
+            height={200}
+          />
+        </motion.div>
 
-      <motion.div
-        className="absolute bottom-0 left-0 hidden md:block"
-        variants={item}
-        custom={3}
-      >
-        <Image
-          src="/images/bottom_left.webp"
-          alt="img"
-          width={300}
-          height={200}
-        />
-      </motion.div>
-      <motion.div
-        className="absolute bottom-0 right-0 hidden md:block"
-        variants={item}
-        custom={4}
-      >
-        <Image
-          src="/images/bottom_right.webp"
-          alt="img"
-          width={300}
-          height={200}
-        />
-      </motion.div>
+        <motion.div
+          className="absolute bottom-0 left-0 hidden md:block"
+          variants={item}
+          custom={3}
+        >
+          <Image
+            priority={true}
+            src="/images/bottom_left.webp"
+            alt="img"
+            width={300}
+            height={200}
+          />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-0 right-0 hidden md:block"
+          variants={item}
+          custom={4}
+        >
+          <Image
+            priority={true}
+            src="/images/bottom_right.webp"
+            alt="img"
+            width={300}
+            height={200}
+          />
+        </motion.div>
+      </div>
     </motion.div>
   )
 }
