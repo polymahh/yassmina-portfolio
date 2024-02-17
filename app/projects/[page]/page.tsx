@@ -1,7 +1,7 @@
-import ProjectSlide from "@/components/projects/ProjectSlide"
+import ProjectSlide from '@/components/projects/ProjectSlide';
 
 function page() {
-  return <ProjectSlide />
+  return <ProjectSlide />;
 }
 
-export default page
+export default page;

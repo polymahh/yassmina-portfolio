@@ -1,16 +1,15 @@
-import React from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Instagram, Linkedin, Twitter } from "lucide-react"
+import { motion } from 'framer-motion';
+import { Instagram, Linkedin } from 'lucide-react';
+import Link from 'next/link';
 
-import { siteConfig } from "@/config/site"
+import { siteConfig } from '@/config/site';
 
 const menuAnimation = {
   closed: {
-    clipPath: "circle(1px at calc(100% - 0px) 0px)",
+    clipPath: 'circle(1px at calc(100% - 0px) 0px)',
 
     transition: {
-      type: "spring",
+      type: 'spring',
       stiffness: 400,
       damping: 40,
     },
@@ -19,43 +18,42 @@ const menuAnimation = {
     clipPath: `circle(${height * 2}px at calc(100% - 10px) 10px)`,
     transition: {
       duration: 1.5,
-      type: "spring",
+      type: 'spring',
       stiffness: 400,
       damping: 40,
     },
   }),
-}
+};
 
 const textMotion = {
   rest: {
     y: 0,
     transition: {
       duration: 0.2,
-      type: "tween",
-      ease: "easeOut",
+      type: 'tween',
+      ease: 'easeOut',
     },
   },
   hover: {
     y: -65,
     transition: {
       duration: 0.2,
-      type: "tween",
-      ease: "easeOut",
+      type: 'tween',
+      ease: 'easeOut',
     },
   },
-}
+};
 
 function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
   return (
     <motion.div
-      className="fixed -right-0 top-0 bottom-0 left-0 flex justify-center  overflow-hidden bg-popover"
+      className="fixed top-0 bottom-0 left-0 flex justify-center overflow-hidden -right-0 bg-popover"
       variants={menuAnimation}
-      animate={open ? "open" : "closed"}
+      animate={open ? 'open' : 'closed'}
       initial="rest"
     >
-      <div className=" container  flex  h-full w-full flex-col-reverse items-center justify-center md:items-end md:p-12  md:flex-row md:justify-between">
-        <div className="flex flex-col gap-2 self-start md:self-end pb-6">
-          <span className="text-xl">(+212) 698 187 514</span>
+      <div className="container flex flex-col-reverse items-center justify-center w-full h-full md:items-end md:p-12 md:flex-row md:justify-between">
+        <div className="flex flex-col self-start gap-2 pb-6 md:self-end">
           <span className="text-xl">elalaouiyasmina@gmail.com</span>
           <div className="flex gap-4 pt-8">
             <Link
@@ -65,11 +63,7 @@ function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
             >
               <Linkedin />
             </Link>
-            <Link
-              href="https://www.instagram.com/yas.dwg"
-              target="_blank"
-              className="hover:text-accent-foreground"
-            >
+            <Link href="https://www.instagram.com/yas.dwg" target="_blank" className="hover:text-accent-foreground">
               <Instagram />
             </Link>
           </div>
@@ -78,12 +72,7 @@ function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
           {siteConfig.mainNav.map(
             (item, index) =>
               item.href && (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className="capitalize"
-                  onClick={() => setOpen(false)}
-                >
+                <Link key={index} href={item.href} className="capitalize" onClick={() => setOpen(false)}>
                   {/* {item.title} */}
                   <motion.div
                     className="flex flex-col overflow-hidden h-[65px]"
@@ -91,10 +80,7 @@ function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
                     whileHover="hover"
                     animate="rest"
                   >
-                    <motion.span
-                      variants={textMotion}
-                      transition={{ staggerChildren: 0.5 }}
-                    >
+                    <motion.span variants={textMotion} transition={{ staggerChildren: 0.5 }}>
                       {item.title}
                     </motion.span>
                     <motion.span
@@ -106,12 +92,12 @@ function MobileMenu({ open, setOpen }: { open: boolean; setOpen: any }) {
                     </motion.span>
                   </motion.div>
                 </Link>
-              )
+              ),
           )}
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
 
-export default MobileMenu
+export default MobileMenu;

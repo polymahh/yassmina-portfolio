@@ -1,22 +1,21 @@
-export type SiteConfig = typeof siteConfig
+export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "YASMINA EL ALAOUI ISMAILI",
+  name: 'Yasmina El Alaoui Ismaili | Architect',
   description:
-    "an architect based in Tangier",
+    "Architect based in Tangier, currently working for AA' - Agence architecture as a collaborating architect",
   mainNav: [
     {
-      title: "Projects",
-      href: "/projects?loaded=true",
+      title: 'Projects',
+      href: '/projects?loaded=true',
     },
     {
-      title: "resume",
-      href: "/resume",
+      title: 'resume',
+      href: '/resume',
     },
     {
-      title: "contact",
-      href: "/contact",
+      title: 'contact',
+      href: '/contact',
     },
   ],
-  
-}
+};

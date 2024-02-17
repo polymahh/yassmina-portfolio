@@ -1,13 +1,11 @@
-import React from "react"
-
-import Projects from "@/components/projects/Projects"
+import Projects from '@/components/projects/Projects';
 
 async function page() {
   return (
-    <section className="md:container relative flex h-full flex-col justify-between gap-6 md:pb-8 md:pt-6 md:py-10">
+    <section className="relative flex flex-col justify-between h-full gap-6 md:container md:py-10 md:pb-8 md:pt-6">
       <Projects />
     </section>
-  )
+  );
 }
 
-export default page
+export default page;
