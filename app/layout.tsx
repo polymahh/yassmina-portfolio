@@ -9,7 +9,7 @@ import { siteConfig } from '@/config/site';
 import { fontSans } from '@/lib/fonts';
 import { getProjects } from '@/lib/requests';
 import { cn } from '@/lib/utils';
-
+import { Analytics } from '@vercel/analytics/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
@@ -74,6 +74,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             </div>
             {/* <TailwindIndicator /> */}
           </ThemeProvider>
+          <Analytics />
         </body>
       </html>
     </>
